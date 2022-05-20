@@ -17,15 +17,15 @@ A primary output of segmentation in each of the image-based experimental methods
 
   - QC criteria
   
-  - Baysor (Viktor Petukhov)  `Github repo <https://github.com/kharchenkolab/Baysor>`_, `Nature Biotechnology (2021) <https://www.nature.com/articles/s41587-021-01044-w>`_ or `BioRxiv preprint <https://www.biorxiv.org/content/10.1101/2020.10.05.326777v1>`_
+  - Baysor (Viktor Petukhov)  `Github repo <https://github.com/kharchenkolab/Baysor>`_, `Nature Biotechnology (2021) <https://www.nature.com/articles/s41587-021-01044-w>`_ or `BioRxiv preprint <https://www.biorxiv.org/content/10.1101/2020.10.05.326777v1>`__
 
-  - mFISHtools (Jeremy Miller) `Github repo <https://github.com/AllenInstitute/mfishtools/>`_
+  - mFISHtools (Jeremy Miller) `Github repo <https://github.com/AllenInstitute/mfishtools/>`__
 
   - Eeshit's method [Eeshit]
 
   - Renee's method: Mapping spatially-defined cells to canonical cell types from scRNA-seq using FR-Match 
 
-  - pciSeq `Github repo <https://github.com/acycliq/pciSeq>`_
+  - pciSeq `Github repo <https://github.com/acycliq/pciSeq>`__
 
   - Yilin's method [Yilin]
 
