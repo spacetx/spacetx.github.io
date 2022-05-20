@@ -1,4 +1,4 @@
-# spacetx-website.github.io
+# spacetx.github.io
 
 ## How to build website locally
 
