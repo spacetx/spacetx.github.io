@@ -45,8 +45,17 @@
                 <li><a class="dropdown-item" href="{{ pathto('spacejam') }}">SpaceJam Hackathon</a></li>
               </ul>
             </li>
-            <li><a class="nav-link" href="{{ pathto('data_analysis') }}">Data and Analysis</a></li>
-            <li><a class="nav-link" href="{{ pathto('results') }}">Results and Code</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Results and Analysis
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{{ pathto('results-scrnaseq') }}">Consensus Taxonomy and Marker Genes</a></li>
+                <li><a class="dropdown-item" href="{{ pathto('results-mapping') }}">Segmentation and Cell Type Mapping</a></li>
+                <li><a class="dropdown-item" href="{{ pathto('results-dataviz') }}">Software, Data Visualization and Example Notebooks</a></li>
+                <li><a class="dropdown-item" href="{{ pathto('results-publications') }}">Publications</a></li>
+              </ul>
+            </li>
             <li><a class="nav-link" href="{{ pathto('contribute') }}">Contributing Guidelines</a></li>
           </ul>
           <form class="d-flex mb-4" id="main-search" action="{{ pathto('search') }}" method="get">
