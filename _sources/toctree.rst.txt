@@ -6,5 +6,5 @@
    results-scrnaseq
    results-mapping
    results-dataviz
-   results-publications
+   publications
    contribute
