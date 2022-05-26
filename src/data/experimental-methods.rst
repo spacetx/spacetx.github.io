@@ -10,7 +10,7 @@ Experimental Methods
    :class: table text-break
    :header-rows: 1
 
-   * - Experimental Method
+   * - Method
      - Multiplexed smFISH
      - Allen MERFISH
      - hybridization-based in situ sequencing
@@ -32,9 +32,9 @@ Experimental Methods
      - no readout imaging
      - yes
    * - **Publications**
-     - https://www.ncbi.nlm.nih.gov/pubmed/30392798
-     - 
-     - https://www.biorxiv.org/content/10.1101/2020.02.03.931618v1
+     - https://www.ncbi.nlm.nih.gov/pubmed/30392798, https://www.nature.com/articles/s41467-021-23807-4
+     - This unpublished MERFISH data is from a prototype pipeline with max projected z-stacks prior to decoding.
+     - https://academic.oup.com/nar/article/48/19/e112/5912821#282922333
      - https://doi.org/10.1126/science.aax2656
      - https://science.sciencemag.org/content/353/6294/78
        https://www.10xgenomics.com/products/spatial-gene-expression/
@@ -103,15 +103,7 @@ Experimental Methods
     
     </div>
 
-  
-SpaceTx Consortium data includes the following experimental methods:
 
-- **multiround smFISH**: `SSAM paper <https://www.nature.com/articles/s41467-021-23807-4>`_
-- **In-situ sequencing**: `hybISS paper <https://academic.oup.com/nar/article/48/19/e112/5912821#282922333>`_
-- **ExSeq**: `ExSeq paper <https://www.science.org/doi/10.1126/science.aax2656>`_
-- **MERFISH**: This unpublished MERFISH data is from a prototype pipeline with max projected z-stacks prior to decoding.
-- **BaristaSeq**: `BaristaSeq paper <https://academic.oup.com/nar/article/46/4/e22/4668654>`_
-
-In addition to these image based spatial transcriptomics methods, we also analyzed data from a sequencing-based method:
+In addition to the image-based spatial transcriptomics methods above, we also analyzed data from a sequencing-based method:
 
 - **Visium**: Visium is a (commercial) sequencing-based technique, where spatially barcoded oligonucleotides with a poly-T sequence are used to capture mRNA from fresh frozen tissue samples. In the Visium platform, capture locations (hereafter; spots), containing the barcoded oligonucleotides, are arranged according by “orange-crate packing” forming an equidistant hexagonal grid.  Spots have a center to center distance of 100μm and a diameter of 55μm. A square region with sides of 6.5mm, containing 4992 spots, constitute the capture area  onto which tissue samples are attached. Brightfield images are taken of the tissue samples after staining with hematoxylin and eosin (HE-images). Count data, obtained after sequencing, can be computationally aligned to the  HE-images and related to morphological features.

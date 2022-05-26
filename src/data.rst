@@ -1,8 +1,8 @@
-Data and Analysis
-=================
+SpaceTx Data
+============
 
-Data
-----
+Downloadable Datasets
+---------------------
 
 .. container:: table-responsive
 
@@ -40,21 +40,10 @@ Data
         `mapped_cell_table.csv <https://s3.amazonaws.com/starfish.data.spacetx/spacetx-website/data/ISS/s3_mapped_cell_table.csv>`__
         `spot_table.csv <https://s3.amazonaws.com/starfish.data.spacetx/spacetx-website/data/ISS/s3_spot_table.csv>`__
 
-.. include:: data_analysis/0.cell-type-clustering.rst
-
-.. include:: data_analysis/1.marker-gene-selection.rst
-
-.. include:: data_analysis/2.experimental-methods.rst
-
-.. include:: data_analysis/3.segmentation.rst
-
-.. include:: data_analysis/4.data-formatting-pipelines.rst
-
-.. include:: data_analysis/5.cell-type-mapping-and-consensus.rst
-
-.. include:: data_analysis/6.data-visualization.rst
 
 
 .. |br| raw:: html
    
       <br>
+
+.. include:: data/experimental-methods.rst
