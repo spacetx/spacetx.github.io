@@ -1,3 +1,8 @@
+.. raw:: html
+
+    <div class="cover-top" style="background-image: url('/_static/merged_spots.webp');">
+    </div>
+
 SpaceTx Data
 ============
 
