@@ -1,5 +1,5 @@
-RNASeq Clusters and Marker Genes
-================================
+Consensus Taxonomy and Marker Genes
+===================================
 
 
 .. include:: results/0.cell-type-clustering.rst
