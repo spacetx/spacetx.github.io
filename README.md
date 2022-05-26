@@ -18,12 +18,12 @@ sudo apt install pandoc
 
 2. Install required python packages
 ```
-pip install sphinx recommonmark ipython nbsphinx
+pip install sphinx recommonmark ipython nbsphinx sphinx-autobuild
 ```
 
 3. Build website.
 ```
-sphinx-build src build
+sphinx-autobuild src build
 ```
 
 And find the result in `build` directory.
