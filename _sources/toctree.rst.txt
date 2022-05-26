@@ -2,6 +2,9 @@
    :maxdepth: 2
 
    about
-   data_analysis
-   results
+   data
+   results-scrnaseq
+   results-mapping
+   results-dataviz
+   results-publications
    contribute

@@ -1,0 +1,19 @@
+Cell Type Mapping Methods
+-------------------------
+
+This is the first time spatial transcriptomics data has been analyzed and compared across methods for cell type determination. We developed approaches to combine multiple cell type mapping methods and applied them to data sets from five experimental methods.
+
+A primary output of segmentation in each of the image-based experimental methods is a table of putative cells which each have a count of the number of molecules per gene as well as a soma location.  Cells located outside of the primary visual cortex (VISp) based on expert annotation or that do not pass quality control filters are excluded from further analysis. 
+
+ We next aimed to assign a cell type and associated confidence to each putative cell based on gene molecule counts.  This was done using a combined analysis approach, where the strategies below were used to map cells to cell types from the taxonomy defined for SpaceTx, and the results of these strategies were then combined to produce a single combined cell type call with associated confidence score for each remaining cell.
+
+- Annotation of VISp area for mapping
+  Cell locations were visualized in Napari https://napari.org and manually 
+  annotated to contain the largest possible area of primary visual cortex. 
+  Layers were manually annotated based on cell density and gene expression.
+
+1. `FR-Match cell2cluster <https://jcventerinstitute.github.io/celligrate/>`_ `[results] <https://github.com/yunzhang813/SpaceTx-cell-type-calling>`_ [example code]
+2. `pciSEQ <https://github.com/acycliq/pciSeq>`_ [results] [example code]
+3. `mFISHtools <https://github.com/AllenInstitute/mfishtools/>`_ [results] [example code]
+4. `Baysor <https://github.com/kharchenkolab/Baysor>`_ [results] [example code]
+5. `Tangram <https://github.com/broadinstitute/Tangram>`_ [results] [example code]

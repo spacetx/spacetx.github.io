@@ -44,8 +44,17 @@
                 <li><a class="dropdown-item" href="spacejam.html">SpaceJam Hackathon</a></li>
               </ul>
             </li>
-            <li><a class="nav-link" href="data_analysis.html">Data and Analysis</a></li>
-            <li><a class="nav-link" href="results.html">Results and Code</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Results and Analysis
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="results-scrnaseq.html">Consensus Taxonomy and Marker Genes</a></li>
+                <li><a class="dropdown-item" href="results-mapping.html">Segmentation and Cell Type Mapping</a></li>
+                <li><a class="dropdown-item" href="results-dataviz.html">Software, Data Visualization and Example Notebooks</a></li>
+                <li><a class="dropdown-item" href="results-publications.html">Publications</a></li>
+              </ul>
+            </li>
             <li><a class="nav-link" href="contribute.html">Contributing Guidelines</a></li>
           </ul>
           <form class="d-flex mb-4" id="main-search" action="search.html" method="get">
@@ -69,7 +78,7 @@
     <h1>People</h1>
   </div>
   <div class="text-center mb-5">
-    <h2>Paper Writing Group</h2>
+    <h2>Final Analysis and Writing Group</h2>
   </div>
   <table class="table">
     <tbody>
@@ -116,7 +125,7 @@
     </tbody>
   </table>
   <div class="text-center mb-5">
-    <h2>Data Generation Group</h2>
+    <h2>Data Generation </h2>
   </div>
   <table class="table">
     <tbody>
@@ -124,10 +133,38 @@
         <th>Name</th>
         <th>Organization</th>
       </tr>
+      <tr>
+        <td> Simone Codeluppi</td>
+        <td> Sten Linarsson Lab, Karolinska Institutet</td>
+      </tr>
+      <tr>
+        <td> Dan Goodwin</td>
+        <td> Ed Boyden Lab, MIT</td>
+      </tr>
+      <tr>
+        <td> Markus Hilscher</td>
+        <td> Stockholm University</td>
+      </tr>
+      <tr>
+        <td> Brian Long</td>
+        <td> Allen Institute for Brain Science</td>
+      </tr>
+      <tr>
+        <td> Nico Pierson</td>
+        <td> Long Cai Lab, Caltech</td>
+      </tr>
+      <tr>
+        <td> Richard Que</td>
+        <td> Kun Zhang Lab, UC San Diego</td>
+      </tr>
+      <tr>
+        <td> Chenglong Xia</td>
+        <td> Xiaowei Zhuang Lab, Harvard University</td>
+      </tr>
     </tbody>
   </table>
   <div class="text-center mb-5">
-    <h2>Data Analysis Group</h2>
+    <h2>Data Analysis </h2>
   </div>
   <table class="table">
     <tbody>
@@ -135,21 +172,22 @@
         <th>Name</th>
         <th>Organization</th>
       </tr>
-    </tbody>
-  </table>
-  <div class="text-center mb-5">
-    <h2>SpaceJam Hackathon attendees</h2>
-  </div>
-  <table class="table">
-    <tbody>
       <tr>
-        <th>Name</th>
-        <th>Organization</th>
+        <td> Brian Aevermann </td>
+        <td> J Craig Venter (currently at Chan Zuckerberg Initiative)</td>
+      </tr>
+      <tr>
+        <td> Trygve Bakken </td>
+        <td> Allen Institute for Brain Science</td>
+      </tr>
+      <tr>
+        <td> Ken Harris</td>
+        <td> UCL</td>
       </tr>
     </tbody>
   </table>
   <div class="text-center">
-    <h2>SpaceJam "2" Hackathon attendees</h2>
+    <h2>SpaceJam 1-2 Hackathon attendees</h2>
   </div>
   <br>
   <table class="table">
@@ -187,6 +225,10 @@
         <td> Chan Zuckerberg Initiative</td>
       </tr>
       <tr>
+        <td> Ambrose Carr</td>
+        <td> Chan Zuckerberg Initiative</td>
+      </tr>
+      <tr>
         <td> Simone Codeluppi</td>
         <td> Karolinska Institutet</td>
       </tr>
@@ -195,8 +237,16 @@
         <td> Leiden University</td>
       </tr>
       <tr>
+        <td> Kira Evans</td>
+        <td> Chan Zuckerberg Initiative</td>
+      </tr>
+      <tr>
         <td> Deep Ganguli</td>
         <td> Chan Zuckerberg Initiative, currently at Anthropic</td>
+      </tr>
+      <tr>
+        <td> Matthew Green</td>
+        <td> European Bioinformatics Institute, currently at Genedata</td>
       </tr>
       <tr>
         <td> Aleksandrina Goeva</td>
@@ -245,6 +295,10 @@
       <tr>
         <td> Christoffer Mattsson Langseth</td>
         <td> Stockholm University</td>
+      </tr>
+      <tr>
+        <td> Nicholas Mei</td>
+        <td> Allen Institute for Brain Science</td>
       </tr>
       <tr>
         <td> Jeremy Miller</td>
@@ -310,20 +364,31 @@
 <li class="toctree-l2"><a class="reference internal" href="about.html#commercial-systems-for-spatial-transcriptomics">Commercial Systems for Spatial Transcriptomics</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="data_analysis.html">Data and Analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_analysis.html#data">Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_analysis.html#cell-type-identification-in-single-cell-rnaseq-data">Cell Type Identification in single cell RNASeq data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_analysis.html#marker-gene-selection">Marker Gene Selection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_analysis.html#experimental-methods">Experimental Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_analysis.html#cell-segmentation">Cell Segmentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_analysis.html#data-formatting-standards-and-computational-pipelines">Data Formatting Standards and Computational Pipelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_analysis.html#data-visualization">Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">SpaceTx Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data.html#downloadable-datasets">Downloadable Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#experimental-methods">Experimental Methods</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">Results and Code</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="results.html#cell-type-mapping-methods">Cell Type Mapping Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="results.html#publications">Publications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="results.html#jupyter-notebooks">Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results-scrnaseq.html">RNASeq Clusters and Marker Genes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="results-scrnaseq.html#cell-type-identification-in-single-cell-rnaseq-data">Cell Type Identification in single cell RNASeq data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results-scrnaseq.html#marker-gene-selection">Marker Gene Selection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="results-mapping.html">Segmentation and Cell Type Mapping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="results-mapping.html#cell-segmentation">Cell Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results-mapping.html#cell-type-mapping-methods">Cell Type Mapping Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="results-mapping.html#cell-type-mapping-consensus">Cell Type Mapping Consensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results-mapping.html#visium-data-single-cell-mapping">Visium Data Single Cell Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results-dataviz.html">Analysis and Results</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="results-dataviz.html#data-formatting-standards-and-computational-pipelines">Data Formatting Standards and Computational Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results-dataviz.html#data-visualization">Data Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results-dataviz.html#jupyter-notebooks">Jupyter Notebooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="results-publications.html">Publications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="results-publications.html#spacetx-publications">SpaceTx Publications</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contributing Guidelines</a></li>
