@@ -45,6 +45,7 @@
                 <li><a class="dropdown-item" href="{{ pathto('spacejam') }}">SpaceJam Hackathon</a></li>
               </ul>
             </li>
+            <li><a class="nav-link" href="{{ pathto('data') }}">SpaceTx Data</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Results and Analysis
@@ -83,12 +84,9 @@
 
 {% block footer %}
   <div id="footer">
-    <div class="container">
-      {{ toctree(maxdepth=2, collapse=False) }}
-      <p class="copyright">
-        © 2022 SpaceTx consortium<br>
-      </p>
-    </div>
+    <p class="copyright">
+      © 2022 SpaceTx consortium<br>
+    </p>
   </div>
 {% endblock %}
 
