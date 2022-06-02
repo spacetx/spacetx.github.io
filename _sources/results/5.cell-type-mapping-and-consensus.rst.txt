@@ -1,12 +1,12 @@
 Cell Type Mapping Consensus
-===========================
+---------------------------
 
 The SpaceTx cell type mapping strategies and combination of these results into consensus mapping results are described in detail in `Reference-based cell type matching of spatial transcriptomics data <https://doi.org/10.1101/2022.03.28.486139>`_.
 
 *summary Figure coming soon*
 
 Visium Data Single Cell Mapping
-===============================
+-------------------------------
   
   - Visium is often described as unbiased and transcriptome-wide, since it’s not based on a priori selection of genes to be examined and targets all poly-adenlated transcripts. However, the current Visium platform does not provide single cell resolution and, though dependent on tissue, the common estimate is that approximately 1-10 cells contribute to the observed gene expression at each spot. The “mini-bulk” property of spots means that spots rarely can be assigned to a single cell type, and more common is to characterize these w.r.t. cell type compositions (e.g., proportion of cell types present at each location). For such purposes, several methods where single cell/nuclei data is used as a guide reference have been proposed, with the shared objective of decomposing the joint expression profiles observed in a spot into contributions from the cell types defined in the single cell/nuclei data.
   - **stereoscope** and **Tangram** were used to deconvolve the spatial Visium data using non-spatial single cell data, a procedure we refer to as “mapping” of the latter onto the former. In short, once presented with the Visium data, both these approaches will provide a proportion estimate of each cell type within every spot, thus allowing the spatial distribution of each cell type to be charted. Although the final products are similar, the two methods differ substantially in design; stereoscope relying on a probabilistic framework where both data modalities are modelled with a negative binomial distribution, while Tangram cast the the task more as a optimization problem where a map between single cells and spatial locations. 

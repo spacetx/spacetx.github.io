@@ -23,9 +23,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Software, Data Visualization and Example Notebooks" href="results-dataviz.html" />
-    <link rel="prev" title="Consensus Taxonomy and Marker Genes" href="results-scrnaseq.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
   </head><body>
   <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light">
     <div class="container pt-2 pb-4">
@@ -49,7 +47,7 @@
               </ul>
             </li>
             <li><a class="nav-link" href="data.html">Data</a></li>
-            <li><a class="nav-link" href="results.html">Results and Analysis</a></li>
+            <li><a class="nav-link" href="#">Results and Analysis</a></li>
             <li><a class="nav-link" href="publications.html">Publications</a></li>
             <li><a class="nav-link" href="contribute.html">Contributing Guidelines</a></li>
           </ul>
@@ -72,7 +70,40 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="segmentation-and-cell-type-mapping">
+  <section id="consensus-taxonomy-and-marker-genes">
+<h1>Consensus Taxonomy and Marker Genes<a class="headerlink" href="#consensus-taxonomy-and-marker-genes" title="Permalink to this heading">¶</a></h1>
+<section id="cell-type-identification-in-single-cell-rnaseq-data">
+<h2>Cell Type Identification in single cell RNASeq data<a class="headerlink" href="#cell-type-identification-in-single-cell-rnaseq-data" title="Permalink to this heading">¶</a></h2>
+<p>The SpaceTx consortium chose the mouse visual cortex as the substrate for spatial transcriptomics comparisons. This was Consensus clustering</p>
+<p>Computational strategies:</p>
+<ul class="simple">
+<li><p>(Eeshit DV) SIMLR (Single-cell Interpretation via Multi-kernel LeaRning) learns an appropriate distance metric for clustering and accounts for drop-outs.  Can also be run as a consensus clustering strategy. (<a class="reference external" href="https://github.com/BatzoglouLabSU/SIMLR">https://github.com/BatzoglouLabSU/SIMLR</a>).</p></li>
+<li><p>(Peter K) PAGODA (Pathway And Gene set Over-Dispersion Analysis) resolves multiple aspects of gene expression heterogeneity by testing gene sets for coordinated variability among measured cells                                                                             (<a class="reference external" href="http://hms-dbmi.github.io/scde/pagoda.html">http://hms-dbmi.github.io/scde/pagoda.html</a>).</p></li>
+<li><p>(Zizhen Y) scrattch.hicat (Hierarchical, Iterative Clustering for Analysis of Transcriptomics) iteratively repeats a multi-step approach on each cluster using different variable genes until no new clusters can be defined, then bootstraps the iterative process (<a class="reference external" href="https://github.com/AllenInstitute/scrattch.hicat">https://github.com/AllenInstitute/scrattch.hicat</a>).</p></li>
+<li><p>(Trygve B) - Precursor pipeline used for human MTG</p></li>
+<li><p>(Kenneth H) proMMT (Probabilistic Mixture Modeling for Transcriptomics) uses an EM algorithm to iteratively define clusters using the Bayesian information criterion and identify a sparse set of genes varying across clusters (Harris et al 2018; “Classes and continua…”; PLoS Biol.).</p></li>
+</ul>
+<p>Most methods were run multiple times with different parameter settings.</p>
+<p>Cluster consensus:</p>
+<ul class="simple">
+<li><p>(Trygve B) - Cluster comparisons using Adjusted Rand, VI, etc. and showing which clusters subclasses /types are split more by various methods</p></li>
+<li><p>(Brian A) - Consensus mouse and human clusters were defined using clusterExperiment R library, which clusters the co-occurrence matrix (<a class="reference external" href="https://github.com/epurdom/clusterExperiment">https://github.com/epurdom/clusterExperiment</a>).</p></li>
+</ul>
+<p>Mouse clusters were defined on VISp + ALM data set and 68 ALM-specific clusters were removed from the consensus clustering, for 191 total clusters</p>
+</section>
+<section id="marker-gene-selection">
+<h2>Marker Gene Selection<a class="headerlink" href="#marker-gene-selection" title="Permalink to this heading">¶</a></h2>
+<p>Four different computational strategies:</p>
+<ul class="simple">
+<li><p>(Jeremy M) - Greedy algorithm generally identifies combinatorial genes.  This method was used for completing smaller panels and validating all panels.</p></li>
+<li><p>(Kenneth H) Probability model aimed to maximize the average number of levels of a clustering tree correctly classified</p></li>
+<li><p>(Brian A) - NS-Forest: Random forest strategy aimed at identifying the most informative markers of specific cell types</p></li>
+<li><p>(Eeshit DV) Random forest strategy which ranks genes based on the overall importance towards classification</p></li>
+</ul>
+<p>(Eeshit DV) These methods were merged together into a ranked list and some gene panels were selected from this list.</p>
+</section>
+</section>
+<section id="segmentation-and-cell-type-mapping">
 <h1>Segmentation and Cell Type Mapping<a class="headerlink" href="#segmentation-and-cell-type-mapping" title="Permalink to this heading">¶</a></h1>
 <section id="cell-segmentation">
 <h2>Cell Segmentation<a class="headerlink" href="#cell-segmentation" title="Permalink to this heading">¶</a></h2>
@@ -136,6 +167,80 @@ Layers were manually annotated based on cell density and gene expression.</p></l
 </ul>
 </div></blockquote>
 </section>
+</section>
+<section id="software-data-visualization-and-example-notebooks">
+<h1>Software, Data Visualization and Example Notebooks<a class="headerlink" href="#software-data-visualization-and-example-notebooks" title="Permalink to this heading">¶</a></h1>
+<section id="data-formatting-standards-and-computational-pipelines">
+<h2>Data Formatting Standards and Computational Pipelines<a class="headerlink" href="#data-formatting-standards-and-computational-pipelines" title="Permalink to this heading">¶</a></h2>
+<p>Many Spatial Transcriptomics methods are based on a common pattern of data acquisition: images are collected in multiple fluorescence channels after a round of readout chemistry, and this process is repeated until all fluorescent readouts have been imaged.  Similarly, the compuational processing pipelines to turn raw images into transcriptional profiles of cells share many computational steps. In this context, the SpaceTx Consortium pursued two software projects:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://spacetx-starfish.readthedocs.io/en/latest/help_and_reference/spacetx-format/SpaceTxFormat/index.html#sptx-format">SpaceTx-Format</a> is a fully-specified format for image-based spatial transcriptomics raw data, including spatial structure of images in 3D, description of round-channel organization and a specification for the “codebook” relating fluorescence images to gene identity.</p></li>
+<li><p><a class="reference external" href="https://spacetx-starfish.readthedocs.io/en/latest/index.html">starfish</a> is a Python package that provides processing modules that can be assembled into completel processing pipelines to extract mRNA locations for barcode methods (MERFISH, SEQFISH), sequencing-based readouts (ISS, FISSEQ) and non-barcoded readouts (osmFISH).</p></li>
+</ul>
+<p>Both of these projects are housed in the <a class="reference external" href="https://github.com/spacetx/starfish">starfish github repo</a> and can be cited using the <a class="reference external" href="https://joss.theoj.org/papers/10.21105/joss.02440">starfish article in Journal of Open Source Software</a>.</p>
+</section>
+<section id="data-visualization">
+<h2>Data Visualization<a class="headerlink" href="#data-visualization" title="Permalink to this heading">¶</a></h2>
+<p>Spatial Transcriptomics data presents unique challenges for visualization.</p>
+<ul>
+<li><dl class="simple">
+<dt>Visualization of processed spatial transcriptomics data</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Processed Spatial Transcriptomics data typically includes:</dt><dd><ul>
+<li><p>Spot Tables: Spatial locations for all mRNA spots detected in the experiment.</p></li>
+<li><p>Cell by Gene Tables: Cell locations and the total mRNA counts associated with each cell.</p></li>
+<li><p>Overview Image: spatial context for high-resolution data. For example, SpaceTx Consortium data includes high resolution data of mouse VISp and the overview image includes a DAPI image of the entire coronal section containing the VISp data.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><dl class="simple">
+<dt>Cell by Gene Visualization in Cytosplore</dt><dd><ul class="simple">
+<li><p>Boudewijn Lelieveldt and the Cytosplore Team have created a project-specific Cytosplore viewer for interactive exploration of SpaceTx cell by gene data</p></li>
+<li><p>download link:</p></li>
+<li><p>walk-through or screenshot</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Segmentation-free data analysis and visualization</dt><dd><ul class="simple">
+<li><p>The heterogeneity of gene expression in tissue can be explored without cell segmentation.</p></li>
+<li><p>The SSAM method (<a class="reference external" href="https://www.nature.com/articles/s41467-021-23807-4">Nature Communications volume 12, Article number: 3545 (2021)</a>) applied to SpaceTx data creates an easily visualized landscape of gene expression that can highlight rare cell types or tissue organization.</p></li>
+</ul>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/to_be_modified_SSAM.png"><img alt="_images/to_be_modified_SSAM.png" src="_images/to_be_modified_SSAM.png" style="width: 800px;" /></a>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><dl class="simple">
+<dt>Image Data Visualization</dt><dd><ul class="simple">
+<li><p>Unlike traditional biological imaging, spatial transcriptomics image data is often uninterpretible on its own. For example, each (round,channel) image from a MERFISH experiment typically contains diffraction-limited spots from all copies of 10s of different mRNA species. However, an image of DAPI from the same experiment could be very useful for visualizing tissue context for processed spatial transcriptomics data.</p></li>
+<li><p>Raw image data for spatial transcriptomics is frequently at the terabyte scale and visualization requires comprehension of the spatial and (round,channel) organization of the images.</p></li>
+<li><p>Modern bioimage visualization tools such as <a class="reference external" href="https://github.com/google/neuroglancer">Neuroglancer</a> and <a class="reference external" href="https://napari.org/">Napari</a> can be used to visualize spatial transcriptomics image data, but only to the extent that image data format information is interpretable by the visualization tool. Visualization tools will become more interoperable when and if the bioimaging community converges on formats and metadata standards for multiround fluorescence experiments. Large community standards projects like  <a class="reference external" href="https://forum.image.sc/tag/ome-ngff">OME-NGFF</a> as well as smaller, nascent projects like <a class="reference external" href="https://github.com/tlambert03/useq-schema">useq-schema</a> could form the basis of a metadata standard that could be applied to spatial transcriptomics microscopy data to simplify interactive visualization of large scale image data.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="jupyter-notebooks">
+<h2>Jupyter Notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="results/nb1.consensus_msmfish.html">SSAM Notebook: Multiplexed smFISH SSAM analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results/nb2.celltype_calling_frmatch.html">Cell type calling for spatial transcriptomics (spaceTx) data - smFISH and scRNAseq</a></li>
+</ul>
+</div>
+<script src="/_static/sidebar.js"></script>
+<link rel="stylesheet" href="/_static/sidebar.css"></section>
 </section>
 
 
