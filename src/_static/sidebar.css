@@ -1,0 +1,24 @@
+#wrapper {
+    position: relative;
+}
+#content {
+    margin: 0 0 0 auto
+}
+.sidebar {
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    padding: 10px;
+    float: left;
+    overflow: hidden;
+}
+.sidebar a {
+    color: black;
+}
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 0;
+    }
+}

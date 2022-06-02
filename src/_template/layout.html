@@ -46,16 +46,7 @@
               </ul>
             </li>
             <li><a class="nav-link" href="{{ pathto('data') }}">Data</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Results and Analysis
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="{{ pathto('results-scrnaseq') }}">Consensus Taxonomy and Marker Genes</a></li>
-                <li><a class="dropdown-item" href="{{ pathto('results-mapping') }}">Segmentation and Cell Type Mapping</a></li>
-                <li><a class="dropdown-item" href="{{ pathto('results-dataviz') }}">Software, Data Visualization and Example Notebooks</a></li>
-              </ul>
-            </li>
+            <li><a class="nav-link" href="{{ pathto('results') }}">Results and Analysis</a></li>
             <li><a class="nav-link" href="{{ pathto('publications') }}">Publications</a></li>
             <li><a class="nav-link" href="{{ pathto('contribute') }}">Contributing Guidelines</a></li>
           </ul>
@@ -73,6 +64,8 @@
 {% block content %}
     <div id="wrapper">
       <div id="main" class="container">
+        <div class="sidebar">
+        </div>
         <div id="content">
           {%- block document %}
           {{ super() }}
