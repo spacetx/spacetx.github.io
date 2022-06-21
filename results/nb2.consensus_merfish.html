@@ -1,0 +1,1942 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<title>SpaceTx: experimental and computational methods compartison for spatially resolved transcriptomics</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="BaristaSeq data SSAM analysis" href="nb3.consensus_baristaseq.html" />
+    <link rel="prev" title="Multiplexed smFISH data SSAM analysis" href="nb1.consensus_msmfish.html" /> 
+  </head><body>
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light">
+    <div class="container pt-2 pb-4">
+      <a class="navbar-brand" href="../index.html"><img id="main-logo" src="/_static/spacetx_logo_web_black.svg"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div id="main-menubar" class="container-fluid">
+      <div class="container position-relative">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-between">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                About
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="../about.html">SpaceTx</a></li>
+                <li><a class="dropdown-item" href="../people.html">People</a></li>
+                <li><a class="dropdown-item" href="../spacejam.html">SpaceJam Hackathon</a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link" href="../data.html">Data</a></li>
+            <li><a class="nav-link" href="../results.html">Results and Analysis</a></li>
+            <li><a class="nav-link" href="../publications.html">Publications</a></li>
+            <li><a class="nav-link" href="../contribute.html">Contributing Guidelines</a></li>
+          </ul>
+          <form class="d-flex mb-4" id="main-search" action="../search.html" method="get">
+            <input class="form-control form-control-sm me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+            <button class="btn btn-success btn-sm" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+    <div id="wrapper">
+      <div id="main" class="container">
+        <div class="sidebar">
+        </div>
+        <div id="content">
+          
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="(Allen)-MERFISH-data-SSAM-analysis">
+<h1>(Allen) MERFISH data SSAM analysis<a class="headerlink" href="#(Allen)-MERFISH-data-SSAM-analysis" title="Permalink to this heading">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ssam</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.family&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Arial&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_class_colors</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Lamp5&quot;</span><span class="p">:</span> <span class="s2">&quot;#DA808C&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Sncg&quot;</span><span class="p">:</span> <span class="s2">&quot;#8510C0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Serpinf1&quot;</span><span class="p">:</span> <span class="s2">&quot;#8510C0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Vip&quot;</span><span class="p">:</span> <span class="s2">&quot;#70559A&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Sst&quot;</span><span class="p">:</span> <span class="s2">&quot;#F15A29&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Pvalb&quot;</span><span class="p">:</span> <span class="s2">&quot;#D93137&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;L2/3 IT&quot;</span><span class="p">:</span> <span class="s2">&quot;#94D9A1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;L4&quot;</span><span class="p">:</span> <span class="s2">&quot;#00979D&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;L5 IT&quot;</span><span class="p">:</span> <span class="s2">&quot;#008A61&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;L6 IT&quot;</span><span class="p">:</span> <span class="s2">&quot;#A19922&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;L5 PT&quot;</span><span class="p">:</span> <span class="s2">&quot;#0D5B78&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;L5 NP&quot;</span><span class="p">:</span> <span class="s2">&quot;#3E9E64&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;L6 CT&quot;</span><span class="p">:</span> <span class="s2">&quot;#69A8E6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;L6 PT&quot;</span><span class="p">:</span> <span class="s2">&quot;#69A8E6&quot;</span><span class="p">,</span> <span class="c1">#???</span>
+    <span class="s2">&quot;L6b&quot;</span><span class="p">:</span> <span class="s2">&quot;#266180&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Meis2&quot;</span><span class="p">:</span> <span class="s2">&quot;#FF0000&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CR&quot;</span><span class="p">:</span> <span class="s2">&quot;#00FF66&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Astro&quot;</span><span class="p">:</span> <span class="s2">&quot;#665C47&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Oligo&quot;</span><span class="p">:</span> <span class="s2">&quot;#53776C&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VLMC&quot;</span><span class="p">:</span> <span class="s2">&quot;#697255&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Peri&quot;</span><span class="p">:</span> <span class="s2">&quot;#665547&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SMC&quot;</span><span class="p">:</span> <span class="s2">&quot;#807059&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Endo&quot;</span><span class="p">:</span> <span class="s2">&quot;#8D6C62&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Macrophage&quot;</span><span class="p">:</span> <span class="s2">&quot;#537358&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bad_genes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cd52&#39;</span><span class="p">,</span> <span class="s1">&#39;Mup5&#39;</span><span class="p">,</span> <span class="s1">&#39;Rab3b&#39;</span><span class="p">,</span> <span class="s1">&#39;Rprml&#39;</span><span class="p">,</span> <span class="s1">&#39;Tac2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">baysor_spots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/baysor/merfish/segmentation.csv&quot;</span><span class="p">)</span>
+<span class="n">spots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/raw/Allen_MERFISH_spots_with_anatomy.csv&quot;</span><span class="p">)</span>
+<span class="n">spots</span> <span class="o">=</span> <span class="n">spots</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">spots</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">spots</span><span class="p">[</span><span class="s1">&#39;is_noise&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">baysor_spots</span><span class="o">.</span><span class="n">is_noise</span>
+<span class="n">spots</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">baysor_spots</span><span class="o">.</span><span class="n">cell</span>
+<span class="n">spots</span> <span class="o">=</span> <span class="n">spots</span><span class="p">[</span><span class="n">spots</span><span class="o">.</span><span class="n">layer</span> <span class="o">!=</span> <span class="s1">&#39;outside_VISp&#39;</span><span class="p">]</span>
+<span class="n">spots</span> <span class="o">=</span> <span class="n">spots</span><span class="p">[</span><span class="o">~</span><span class="n">spots</span><span class="o">.</span><span class="n">gene</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;Blank-&quot;</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">bad_gene</span> <span class="ow">in</span> <span class="n">bad_genes</span><span class="p">:</span>
+    <span class="n">spots</span> <span class="o">=</span> <span class="n">spots</span><span class="p">[</span><span class="n">spots</span><span class="o">.</span><span class="n">gene</span> <span class="o">!=</span> <span class="n">bad_gene</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates_visp</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">2524.8618583932202</span><span class="p">,</span> <span class="mf">6576.111948820892</span><span class="p">],</span>
+   <span class="p">[</span><span class="mf">1688.0005423837813</span><span class="p">,</span> <span class="mf">5869.404423590317</span><span class="p">],</span>
+   <span class="p">[</span><span class="mf">2299.438470759311</span><span class="p">,</span> <span class="mf">4923.428032738741</span><span class="p">],</span>
+   <span class="p">[</span><span class="mf">3273.6610578379136</span><span class="p">,</span> <span class="mf">5452.419069146657</span><span class="p">],</span>
+   <span class="p">[</span><span class="mf">2851.6245044166735</span><span class="p">,</span> <span class="mf">6284.883773573806</span><span class="p">],</span>
+   <span class="p">[</span><span class="mf">2851.6245044166735</span><span class="p">,</span> <span class="mf">6284.883773573806</span><span class="p">],</span>
+   <span class="p">[</span><span class="mf">2524.8618583932202</span><span class="p">,</span> <span class="mf">6576.111948820892</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Polygon</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coordinates_visp</span><span class="p">)</span>
+<span class="n">spots</span><span class="p">[</span><span class="s1">&#39;VISp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="k">else</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">spots</span><span class="p">[[</span><span class="s2">&quot;x_um&quot;</span><span class="p">,</span><span class="s2">&quot;y_um&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spots</span> <span class="o">=</span> <span class="n">spots</span><span class="p">[</span><span class="n">spots</span><span class="p">[</span><span class="s1">&#39;VISp&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="o">.</span><span class="n">exterior</span><span class="o">.</span><span class="n">xy</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">spots</span><span class="o">.</span><span class="n">x_um</span><span class="p">,</span> <span class="n">spots</span><span class="o">.</span><span class="n">y_um</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.collections.PathCollection at 0x7f53e95ea910&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_10_1.png" src="../_images/results_nb2.consensus_merfish_10_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="mf">1.03388671635385</span>
+<span class="n">rotm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">beta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">beta</span><span class="p">)]])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos_um</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">spots</span><span class="o">.</span><span class="n">x_um</span><span class="p">,</span> <span class="n">spots</span><span class="o">.</span><span class="n">y_um</span><span class="p">])</span>
+<span class="n">rot_um</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pos_um</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">rotm</span><span class="p">)</span>
+<span class="n">rot_um</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">rot_um</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">rot_um</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">rot_um</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">rot_um</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1350</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1350</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(0.0, 1350.0)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_13_1.png" src="../_images/results_nb2.consensus_merfish_13_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">ssam</span><span class="o">.</span><span class="n">SSAMDataset</span><span class="p">(</span><span class="s2">&quot;ssam_data/allen_merfish&quot;</span><span class="p">)</span>
+<span class="n">analysis</span> <span class="o">=</span> <span class="n">ssam</span><span class="o">.</span><span class="n">SSAMAnalysis</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">ncores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">locations</span> <span class="o">=</span> <span class="n">spots</span><span class="p">[[</span><span class="s2">&quot;gene&quot;</span><span class="p">,</span> <span class="s2">&quot;x_um&quot;</span><span class="p">,</span> <span class="s2">&quot;y_um&quot;</span><span class="p">,</span> <span class="s2">&quot;cell&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x_um&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y_um&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;gene&#39;</span><span class="p">)</span>
+<span class="n">locations</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">rot_um</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">locations</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">rot_um</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">locations</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Allen_MERFISH_filtered.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">run_kde</span><span class="p">(</span><span class="n">locations</span><span class="o">=</span><span class="n">locations</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">locations</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">height</span><span class="o">=</span><span class="n">locations</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">re_run</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running KDE for gene 1700022I11Rik...
+Saving KDE for gene 1700022I11Rik...
+Running KDE for gene 1810046K07Rik...
+Saving KDE for gene 1810046K07Rik...
+Running KDE for gene 5031425F14Rik...
+Saving KDE for gene 5031425F14Rik...
+Running KDE for gene 5730522E02Rik...
+Saving KDE for gene 5730522E02Rik...
+Running KDE for gene Acta2...
+Saving KDE for gene Acta2...
+Running KDE for gene Adam2...
+Saving KDE for gene Adam2...
+Running KDE for gene Adamts2...
+Saving KDE for gene Adamts2...
+Running KDE for gene Adamts4...
+Saving KDE for gene Adamts4...
+Running KDE for gene Adra1b...
+Saving KDE for gene Adra1b...
+Running KDE for gene Alk...
+Saving KDE for gene Alk...
+Running KDE for gene Ankfn1...
+Saving KDE for gene Ankfn1...
+Running KDE for gene Ano4...
+Saving KDE for gene Ano4...
+Running KDE for gene Aqp4...
+Saving KDE for gene Aqp4...
+Running KDE for gene Asic4...
+Saving KDE for gene Asic4...
+Running KDE for gene B4galnt2...
+Saving KDE for gene B4galnt2...
+Running KDE for gene B4galnt3...
+Saving KDE for gene B4galnt3...
+Running KDE for gene Barx2...
+Saving KDE for gene Barx2...
+Running KDE for gene Bcl11b...
+Saving KDE for gene Bcl11b...
+Running KDE for gene Bdnf...
+Saving KDE for gene Bdnf...
+Running KDE for gene Bgn...
+Saving KDE for gene Bgn...
+Running KDE for gene Blnk...
+Saving KDE for gene Blnk...
+Running KDE for gene Bmpr1b...
+Saving KDE for gene Bmpr1b...
+Running KDE for gene Brinp3...
+Saving KDE for gene Brinp3...
+Running KDE for gene C1ql3...
+Saving KDE for gene C1ql3...
+Running KDE for gene C1qtnf7...
+Saving KDE for gene C1qtnf7...
+Running KDE for gene Cacng5...
+Saving KDE for gene Cacng5...
+Running KDE for gene Calb1...
+Saving KDE for gene Calb1...
+Running KDE for gene Calb2...
+Saving KDE for gene Calb2...
+Running KDE for gene Camk2d...
+Saving KDE for gene Camk2d...
+Running KDE for gene Car3...
+Saving KDE for gene Car3...
+Running KDE for gene Cbln2...
+Saving KDE for gene Cbln2...
+Running KDE for gene Cbln4...
+Saving KDE for gene Cbln4...
+Running KDE for gene Ccbe1...
+Saving KDE for gene Ccbe1...
+Running KDE for gene Ccdc162...
+Saving KDE for gene Ccdc162...
+Running KDE for gene Ccdc3...
+Saving KDE for gene Ccdc3...
+Running KDE for gene Ccdc80...
+Saving KDE for gene Ccdc80...
+Running KDE for gene Ccnb1...
+Saving KDE for gene Ccnb1...
+Running KDE for gene Cd14...
+Saving KDE for gene Cd14...
+Running KDE for gene Cd24a...
+Saving KDE for gene Cd24a...
+Running KDE for gene Cdca7...
+Saving KDE for gene Cdca7...
+Running KDE for gene Cdcp1...
+Saving KDE for gene Cdcp1...
+Running KDE for gene Cdh12...
+Saving KDE for gene Cdh12...
+Running KDE for gene Cdh13...
+Saving KDE for gene Cdh13...
+Running KDE for gene Cdh20...
+Saving KDE for gene Cdh20...
+Running KDE for gene Cdh9...
+Saving KDE for gene Cdh9...
+Running KDE for gene Ceacam9...
+Saving KDE for gene Ceacam9...
+Running KDE for gene Cemip...
+Saving KDE for gene Cemip...
+Running KDE for gene Chat...
+Saving KDE for gene Chat...
+Running KDE for gene Chn2...
+Saving KDE for gene Chn2...
+Running KDE for gene Chodl...
+Saving KDE for gene Chodl...
+Running KDE for gene Chrm2...
+Saving KDE for gene Chrm2...
+Running KDE for gene Chrna2...
+Saving KDE for gene Chrna2...
+Running KDE for gene Cldn5...
+Saving KDE for gene Cldn5...
+Running KDE for gene Clrn1...
+Saving KDE for gene Clrn1...
+Running KDE for gene Cnr1...
+Saving KDE for gene Cnr1...
+Running KDE for gene Cntnap5b...
+Saving KDE for gene Cntnap5b...
+Running KDE for gene Cobll1...
+Saving KDE for gene Cobll1...
+Running KDE for gene Col14a1...
+Saving KDE for gene Col14a1...
+Running KDE for gene Col15a1...
+Saving KDE for gene Col15a1...
+Running KDE for gene Col23a1...
+Saving KDE for gene Col23a1...
+Running KDE for gene Col24a1...
+Saving KDE for gene Col24a1...
+Running KDE for gene Col25a1...
+Saving KDE for gene Col25a1...
+Running KDE for gene Corin...
+Saving KDE for gene Corin...
+Running KDE for gene Cplx3...
+Saving KDE for gene Cplx3...
+Running KDE for gene Crhr2...
+Saving KDE for gene Crhr2...
+Running KDE for gene Crispld2...
+Saving KDE for gene Crispld2...
+Running KDE for gene Cspg4...
+Saving KDE for gene Cspg4...
+Running KDE for gene Ctss...
+Saving KDE for gene Ctss...
+Running KDE for gene Cux2...
+Saving KDE for gene Cux2...
+Running KDE for gene Cxcl14...
+Saving KDE for gene Cxcl14...
+Running KDE for gene Daam2...
+Saving KDE for gene Daam2...
+Running KDE for gene Dmkn...
+Saving KDE for gene Dmkn...
+Running KDE for gene Dnase1l3...
+Saving KDE for gene Dnase1l3...
+Running KDE for gene Dscaml1...
+Saving KDE for gene Dscaml1...
+Running KDE for gene Egfem1...
+Saving KDE for gene Egfem1...
+Running KDE for gene Egfr...
+Saving KDE for gene Egfr...
+Running KDE for gene Egln3...
+Saving KDE for gene Egln3...
+Running KDE for gene Egr2...
+Saving KDE for gene Egr2...
+Running KDE for gene Elfn1...
+Saving KDE for gene Elfn1...
+Running KDE for gene Enpp6...
+Saving KDE for gene Enpp6...
+Running KDE for gene Epha7...
+Saving KDE for gene Epha7...
+Running KDE for gene Fam19a2...
+Saving KDE for gene Fam19a2...
+Running KDE for gene Fam84b...
+Saving KDE for gene Fam84b...
+Running KDE for gene Fbxl7...
+Saving KDE for gene Fbxl7...
+Running KDE for gene Fezf2...
+Saving KDE for gene Fezf2...
+Running KDE for gene Flrt3...
+Saving KDE for gene Flrt3...
+Running KDE for gene Flt1...
+Saving KDE for gene Flt1...
+Running KDE for gene Fndc7...
+Saving KDE for gene Fndc7...
+Running KDE for gene Fosb...
+Saving KDE for gene Fosb...
+Running KDE for gene Foxp2...
+Saving KDE for gene Foxp2...
+Running KDE for gene Frem2...
+Saving KDE for gene Frem2...
+Running KDE for gene Fst...
+Saving KDE for gene Fst...
+Running KDE for gene Gad1...
+Saving KDE for gene Gad1...
+Running KDE for gene Gad2...
+Saving KDE for gene Gad2...
+Running KDE for gene Gfap...
+Saving KDE for gene Gfap...
+Running KDE for gene Glra1...
+Saving KDE for gene Glra1...
+Running KDE for gene Gpc6...
+Saving KDE for gene Gpc6...
+Running KDE for gene Grik1...
+Saving KDE for gene Grik1...
+Running KDE for gene Grin3a...
+Saving KDE for gene Grin3a...
+Running KDE for gene Grm1...
+Saving KDE for gene Grm1...
+Running KDE for gene Grm8...
+Saving KDE for gene Grm8...
+Running KDE for gene Hpse...
+Saving KDE for gene Hpse...
+Running KDE for gene Hs3st5...
+Saving KDE for gene Hs3st5...
+Running KDE for gene Igf2...
+Saving KDE for gene Igf2...
+Running KDE for gene Igfbp4...
+Saving KDE for gene Igfbp4...
+Running KDE for gene Igfbp5...
+Saving KDE for gene Igfbp5...
+Running KDE for gene Igfbp6...
+Saving KDE for gene Igfbp6...
+Running KDE for gene Ikzf2...
+Saving KDE for gene Ikzf2...
+Running KDE for gene Il1rapl2...
+Saving KDE for gene Il1rapl2...
+Running KDE for gene Il4ra...
+Saving KDE for gene Il4ra...
+Running KDE for gene Inpp4b...
+Saving KDE for gene Inpp4b...
+Running KDE for gene Iqgap2...
+Saving KDE for gene Iqgap2...
+Running KDE for gene Itgb8...
+Saving KDE for gene Itgb8...
+Running KDE for gene Kcng1...
+Saving KDE for gene Kcng1...
+Running KDE for gene Kcnj8...
+Saving KDE for gene Kcnj8...
+Running KDE for gene L3mbtl4...
+Saving KDE for gene L3mbtl4...
+Running KDE for gene Lama3...
+Saving KDE for gene Lama3...
+Running KDE for gene Lamp5...
+Saving KDE for gene Lamp5...
+Running KDE for gene Lhx6...
+Saving KDE for gene Lhx6...
+Running KDE for gene Lmo1...
+Saving KDE for gene Lmo1...
+Running KDE for gene Lsp1...
+Saving KDE for gene Lsp1...
+Running KDE for gene Ltf...
+Saving KDE for gene Ltf...
+Running KDE for gene Luzp2...
+Saving KDE for gene Luzp2...
+Running KDE for gene Lypd1...
+Saving KDE for gene Lypd1...
+Running KDE for gene Lyzl4...
+Saving KDE for gene Lyzl4...
+Running KDE for gene March1...
+Saving KDE for gene March1...
+Running KDE for gene Marcksl1...
+Saving KDE for gene Marcksl1...
+Running KDE for gene Meis2...
+Saving KDE for gene Meis2...
+Running KDE for gene Moxd1...
+Saving KDE for gene Moxd1...
+Running KDE for gene Mrc1...
+Saving KDE for gene Mrc1...
+Running KDE for gene Mrgprx2...
+Saving KDE for gene Mrgprx2...
+Running KDE for gene Muc20...
+Saving KDE for gene Muc20...
+Running KDE for gene Myh14...
+Saving KDE for gene Myh14...
+Running KDE for gene Ndst4...
+Saving KDE for gene Ndst4...
+Running KDE for gene Nhs...
+Saving KDE for gene Nhs...
+Running KDE for gene Nkain3...
+Saving KDE for gene Nkain3...
+Running KDE for gene Nnmt...
+Saving KDE for gene Nnmt...
+Running KDE for gene Nos1...
+Saving KDE for gene Nos1...
+Running KDE for gene Npas1...
+Saving KDE for gene Npas1...
+Running KDE for gene Npnt...
+Saving KDE for gene Npnt...
+Running KDE for gene Npsr1...
+Saving KDE for gene Npsr1...
+Running KDE for gene Npy2r...
+Saving KDE for gene Npy2r...
+Running KDE for gene Nr2f2...
+Saving KDE for gene Nr2f2...
+Running KDE for gene Nr4a1...
+Saving KDE for gene Nr4a1...
+Running KDE for gene Nr4a2...
+Saving KDE for gene Nr4a2...
+Running KDE for gene Ntng2...
+Saving KDE for gene Ntng2...
+Running KDE for gene Nxph1...
+Saving KDE for gene Nxph1...
+Running KDE for gene Nxph2...
+Saving KDE for gene Nxph2...
+Running KDE for gene Nxph4...
+Saving KDE for gene Nxph4...
+Running KDE for gene Olah...
+Saving KDE for gene Olah...
+Running KDE for gene Olfm3...
+Saving KDE for gene Olfm3...
+Running KDE for gene Opalin...
+Saving KDE for gene Opalin...
+Running KDE for gene Oprk1...
+Saving KDE for gene Oprk1...
+Running KDE for gene Osr1...
+Saving KDE for gene Osr1...
+Running KDE for gene Otof...
+Saving KDE for gene Otof...
+Running KDE for gene Parm1...
+Saving KDE for gene Parm1...
+Running KDE for gene Pcdh8...
+Saving KDE for gene Pcdh8...
+Running KDE for gene Pde11a...
+Saving KDE for gene Pde11a...
+Running KDE for gene Pdgfc...
+Saving KDE for gene Pdgfc...
+Running KDE for gene Pdgfra...
+Saving KDE for gene Pdgfra...
+Running KDE for gene Pdlim5...
+Saving KDE for gene Pdlim5...
+Running KDE for gene Penk...
+Saving KDE for gene Penk...
+Running KDE for gene Phactr2...
+Saving KDE for gene Phactr2...
+Running KDE for gene Plch1...
+Saving KDE for gene Plch1...
+Running KDE for gene Plcxd3...
+Saving KDE for gene Plcxd3...
+Running KDE for gene Pld5...
+Saving KDE for gene Pld5...
+Running KDE for gene Plekhg3...
+Saving KDE for gene Plekhg3...
+Running KDE for gene Pou3f1...
+Saving KDE for gene Pou3f1...
+Running KDE for gene Pou3f3...
+Saving KDE for gene Pou3f3...
+Running KDE for gene Pou6f2...
+Saving KDE for gene Pou6f2...
+Running KDE for gene Prdm8...
+Saving KDE for gene Prdm8...
+Running KDE for gene Prok2...
+Saving KDE for gene Prok2...
+Running KDE for gene Prokr2...
+Saving KDE for gene Prokr2...
+Running KDE for gene Prox1...
+Saving KDE for gene Prox1...
+Running KDE for gene Prr16...
+Saving KDE for gene Prr16...
+Running KDE for gene Prss12...
+Saving KDE for gene Prss12...
+Running KDE for gene Prss23...
+Saving KDE for gene Prss23...
+Running KDE for gene Ptger3...
+Saving KDE for gene Ptger3...
+Running KDE for gene Ptprk...
+Saving KDE for gene Ptprk...
+Running KDE for gene Ptprm...
+Saving KDE for gene Ptprm...
+Running KDE for gene Ptprt...
+Saving KDE for gene Ptprt...
+Running KDE for gene Ptpru...
+Saving KDE for gene Ptpru...
+Running KDE for gene Pvalb...
+Saving KDE for gene Pvalb...
+Running KDE for gene Pxdc1...
+Saving KDE for gene Pxdc1...
+Running KDE for gene Ramp1...
+Saving KDE for gene Ramp1...
+Running KDE for gene Reln...
+Saving KDE for gene Reln...
+Running KDE for gene Rerg...
+Saving KDE for gene Rerg...
+Running KDE for gene Rfx3...
+Saving KDE for gene Rfx3...
+Running KDE for gene Rgs5...
+Saving KDE for gene Rgs5...
+Running KDE for gene Rgs6...
+Saving KDE for gene Rgs6...
+Running KDE for gene Rnf152...
+Saving KDE for gene Rnf152...
+Running KDE for gene Ror1...
+Saving KDE for gene Ror1...
+Running KDE for gene Rorb...
+Saving KDE for gene Rorb...
+Running KDE for gene Rspo1...
+Saving KDE for gene Rspo1...
+Running KDE for gene Rxfp1...
+Saving KDE for gene Rxfp1...
+Running KDE for gene Rxfp2...
+Saving KDE for gene Rxfp2...
+Running KDE for gene Satb2...
+Saving KDE for gene Satb2...
+Running KDE for gene Scgn...
+Saving KDE for gene Scgn...
+Running KDE for gene Sema3e...
+Saving KDE for gene Sema3e...
+Running KDE for gene Sema5a...
+Saving KDE for gene Sema5a...
+Running KDE for gene Serpinf1...
+Saving KDE for gene Serpinf1...
+Running KDE for gene Sertm1...
+Saving KDE for gene Sertm1...
+Running KDE for gene Sgcd...
+Saving KDE for gene Sgcd...
+Running KDE for gene Shisa9...
+Saving KDE for gene Shisa9...
+Running KDE for gene Slc17a6...
+Saving KDE for gene Slc17a6...
+Running KDE for gene Slc17a7...
+Saving KDE for gene Slc17a7...
+Running KDE for gene Slc17a8...
+Saving KDE for gene Slc17a8...
+Running KDE for gene Slc25a13...
+Saving KDE for gene Slc25a13...
+Running KDE for gene Slc30a3...
+Saving KDE for gene Slc30a3...
+Running KDE for gene Slc32a1...
+Saving KDE for gene Slc32a1...
+Running KDE for gene Slc44a5...
+Saving KDE for gene Slc44a5...
+Running KDE for gene Slco5a1...
+Saving KDE for gene Slco5a1...
+Running KDE for gene Sncg...
+Saving KDE for gene Sncg...
+Running KDE for gene Sox10...
+Saving KDE for gene Sox10...
+Running KDE for gene Sox6...
+Saving KDE for gene Sox6...
+Running KDE for gene Sp8...
+Saving KDE for gene Sp8...
+Running KDE for gene Spon1...
+Saving KDE for gene Spon1...
+Running KDE for gene Sst...
+Saving KDE for gene Sst...
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">load_kde</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">plot_l1norm</span><span class="p">(</span><span class="n">rotate</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;function matplotlib.pyplot.xlim(*args, **kwargs)&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_19_1.png" src="../_images/results_nb2.consensus_merfish_19_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">find_localmax</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Found 4535 local max vectors.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">plot_l1norm</span><span class="p">(</span><span class="n">rotate</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Greys&quot;</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">plot_localmax</span><span class="p">(</span><span class="n">rotate</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_21_0.png" src="../_images/results_nb2.consensus_merfish_21_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">normalize_vectors</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loaded a cached normalized vector field (to avoid this behavior, set re_run=True).
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_by_gene</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/jeremy_filtered/MERFISH_v1_filtered_cellxgene.csv&quot;</span><span class="p">)</span>
+<span class="n">cell_by_gene</span> <span class="o">=</span> <span class="n">cell_by_gene</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;gene_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">ds</span><span class="o">.</span><span class="n">genes</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">normalize</span><span class="p">,</span> <span class="n">scale</span>
+<span class="c1">#cell_by_gene_normalized = ssam.run_sctransform(cell_by_gene.reset_index(drop=True), plot_model_pars=True)[0]</span>
+<span class="n">cell_by_gene_normalized</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">cell_by_gene</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;l1&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">cell_by_gene_normalized_scaled</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">cell_by_gene_normalized</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+
+<span class="k">def</span> <span class="nf">sort_genes</span><span class="p">(</span><span class="n">centroids</span><span class="p">,</span> <span class="n">tbl</span><span class="p">,</span> <span class="n">genes</span><span class="p">,</span> <span class="n">min_exp</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">sorted_genes</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[])</span>
+    <span class="n">sorted_cnt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">sorted_cnt</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">genes</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">cidx</span><span class="p">,</span> <span class="n">mean_cl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">centroids</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">gidx</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">mean_cl</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="ow">not</span> <span class="n">genes</span><span class="p">[</span><span class="n">gidx</span><span class="p">]</span> <span class="ow">in</span> <span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">sorted_genes</span><span class="o">.</span><span class="n">values</span><span class="p">()]):</span>
+                    <span class="k">if</span> <span class="n">mean_cl</span><span class="p">[</span><span class="n">gidx</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_exp</span><span class="p">:</span>
+                        <span class="n">sorted_genes</span><span class="p">[</span><span class="s2">&quot;rem&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">genes</span><span class="p">[</span><span class="n">gidx</span><span class="p">])</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">sorted_genes</span><span class="p">[</span><span class="n">cidx</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">genes</span><span class="p">[</span><span class="n">gidx</span><span class="p">])</span>
+                    <span class="n">sorted_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">break</span>
+    <span class="n">sorted_genes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">sorted_genes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centroids</span><span class="p">))]))</span> <span class="o">+</span> <span class="n">sorted_genes</span><span class="p">[</span><span class="s2">&quot;rem&quot;</span><span class="p">]</span>
+    <span class="n">sorted_gidx</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">genes</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">sorted_genes</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">tbl</span><span class="p">[:,</span> <span class="n">sorted_gidx</span><span class="p">],</span> <span class="n">sorted_genes</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_heatmap</span><span class="p">(</span><span class="n">sorted_cbg</span><span class="p">,</span> <span class="n">sorted_genes</span><span class="p">,</span> <span class="n">calls</span><span class="p">,</span> <span class="n">uniq_calls</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">figsize</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+    <span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">Divider</span><span class="p">,</span> <span class="n">Size</span>
+    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">patches</span>
+
+    <span class="n">rects</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sorted_cbg2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">sorted_cbg</span><span class="p">)</span>
+    <span class="n">curpos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">cell_type</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">uniq_calls</span><span class="p">,</span> <span class="n">cols</span><span class="p">)):</span>
+        <span class="n">cl_vecs</span> <span class="o">=</span> <span class="n">sorted_cbg</span><span class="p">[</span><span class="n">calls</span><span class="o">.</span><span class="n">subclass</span> <span class="o">==</span> <span class="n">cell_type</span><span class="p">]</span>
+        <span class="n">sorted_cbg2</span><span class="p">[</span><span class="n">curpos</span><span class="p">:</span><span class="n">curpos</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">cl_vecs</span><span class="p">)]</span> <span class="o">=</span> <span class="n">cl_vecs</span>
+        <span class="n">rects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">curpos</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">curpos</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">cl_vecs</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">col</span><span class="p">))</span>
+        <span class="n">curpos</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cl_vecs</span><span class="p">)</span>
+
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+    <span class="c1">#fig, axes = plt.subplots(2, 1, figsize=[20, 10], sharex=True)</span>
+
+    <span class="n">h</span> <span class="o">=</span> <span class="p">[</span><span class="n">Size</span><span class="o">.</span><span class="n">Fixed</span><span class="p">(</span><span class="mf">1.5</span><span class="p">),</span> <span class="n">Size</span><span class="o">.</span><span class="n">Scaled</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)]</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">Size</span><span class="o">.</span><span class="n">Fixed</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Size</span><span class="o">.</span><span class="n">Scaled</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">Size</span><span class="o">.</span><span class="n">Fixed</span><span class="p">(</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">Size</span><span class="o">.</span><span class="n">Fixed</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)]</span>
+    <span class="n">divider</span> <span class="o">=</span> <span class="n">Divider</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">h</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">ax_heatmap</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">divider</span><span class="o">.</span><span class="n">get_position</span><span class="p">(),</span> <span class="n">axes_locator</span><span class="o">=</span><span class="n">divider</span><span class="o">.</span><span class="n">new_locator</span><span class="p">(</span><span class="n">nx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ny</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">ax_ctbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">divider</span><span class="o">.</span><span class="n">get_position</span><span class="p">(),</span> <span class="n">axes_locator</span><span class="o">=</span><span class="n">divider</span><span class="o">.</span><span class="n">new_locator</span><span class="p">(</span><span class="n">nx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ny</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="n">ax_heatmap</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">rect</span> <span class="ow">in</span> <span class="n">rects</span><span class="p">:</span>
+        <span class="n">ax_ctbar</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+
+    <span class="n">ax_ctbar</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax_ctbar</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">sp</span> <span class="ow">in</span> <span class="n">ax_ctbar</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">sp</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">sp</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">sorted_cbg2</span><span class="o">.</span><span class="n">T</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">sorted_genes</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">cbar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax_heatmap</span><span class="p">)</span>
+    <span class="n">ax_heatmap</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">ax_heatmap</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">():</span>
+        <span class="n">tick</span><span class="o">.</span><span class="n">set_fontname</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">sp</span> <span class="ow">in</span> <span class="n">ax_heatmap</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">sp</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">sp</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">sp</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1">#ax_hist = fig.add_axes([1.02, 0.74, 0.08, 0.1])</span>
+    <span class="c1">#ax_hist.hist(np.ravel(sorted_cbg2), bins=100, histtype=&#39;step&#39;, lw=3, color=&#39;lime&#39;)</span>
+    <span class="c1">#ax_hist.set_xlim([-2.5, 2.5])</span>
+    <span class="c1">#ax_hist.axes.xaxis.set_ticks([-2.5, 0, 2.5])</span>
+    <span class="c1">#ax_hist.axes.yaxis.set_visible(False)</span>
+
+    <span class="k">return</span> <span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calls_nwcs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;consensus_calls/renee/MERFISH_v1_filtered_combined_mapping_neg_weight_subclass.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calls_nwcs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sample_name</th>
+      <th>subclass</th>
+      <th>rmax</th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>L6 PT</td>
+      <td>0.494448</td>
+      <td>712.40142</td>
+      <td>204.819190</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>12</td>
+      <td>L2/3 IT</td>
+      <td>0.682338</td>
+      <td>1217.39318</td>
+      <td>883.516611</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18</td>
+      <td>L2/3 IT</td>
+      <td>0.638946</td>
+      <td>891.96394</td>
+      <td>1036.272708</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>20</td>
+      <td>L2/3 IT</td>
+      <td>0.367690</td>
+      <td>654.74648</td>
+      <td>973.435156</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>22</td>
+      <td>L2/3 IT</td>
+      <td>0.771932</td>
+      <td>645.90474</td>
+      <td>923.882162</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2145</th>
+      <td>5873</td>
+      <td>L6 PT</td>
+      <td>0.712868</td>
+      <td>1172.87814</td>
+      <td>136.951414</td>
+    </tr>
+    <tr>
+      <th>2146</th>
+      <td>5875</td>
+      <td>L2/3 IT</td>
+      <td>0.497523</td>
+      <td>241.48159</td>
+      <td>665.555457</td>
+    </tr>
+    <tr>
+      <th>2147</th>
+      <td>5877</td>
+      <td>L4</td>
+      <td>0.568966</td>
+      <td>968.05080</td>
+      <td>710.759896</td>
+    </tr>
+    <tr>
+      <th>2148</th>
+      <td>5878</td>
+      <td>Pvalb</td>
+      <td>0.649862</td>
+      <td>859.54284</td>
+      <td>480.890285</td>
+    </tr>
+    <tr>
+      <th>2149</th>
+      <td>5990</td>
+      <td>L2/3 IT</td>
+      <td>0.461098</td>
+      <td>482.98299</td>
+      <td>1056.178312</td>
+    </tr>
+  </tbody>
+</table>
+<p>2150 rows × 5 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uniq_celltypes_nwcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">cl</span> <span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="n">cell_class_colors</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">cl</span> <span class="ow">in</span> <span class="n">calls_nwcs</span><span class="o">.</span><span class="n">subclass</span><span class="o">.</span><span class="n">unique</span><span class="p">()]</span>
+<span class="n">centroids_nwcs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">cell_type</span> <span class="ow">in</span> <span class="n">uniq_celltypes_nwcs</span><span class="p">:</span>
+    <span class="n">centroids_nwcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cell_by_gene_normalized</span><span class="p">[</span><span class="n">calls_nwcs</span><span class="o">.</span><span class="n">subclass</span> <span class="o">==</span> <span class="n">cell_type</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centroids_scaled_nwcs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">cell_type</span> <span class="ow">in</span> <span class="n">uniq_celltypes_nwcs</span><span class="p">:</span>
+    <span class="n">centroids_scaled_nwcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cell_by_gene_normalized_scaled</span><span class="p">[</span><span class="n">calls_nwcs</span><span class="o">.</span><span class="n">subclass</span> <span class="o">==</span> <span class="n">cell_type</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">sorted_cbg</span><span class="p">,</span> <span class="n">sorted_genes</span> <span class="o">=</span> <span class="n">sort_genes</span><span class="p">(</span><span class="n">centroids_scaled_nwcs</span><span class="p">,</span> <span class="n">cell_by_gene_normalized_scaled</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">genes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell_class_colors</span><span class="p">[</span><span class="n">ct</span><span class="p">]</span> <span class="k">for</span> <span class="n">ct</span> <span class="ow">in</span> <span class="n">uniq_celltypes_nwcs</span><span class="p">]</span>
+<span class="n">plot_heatmap</span><span class="p">(</span><span class="n">sorted_cbg</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sorted_genes</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">calls_nwcs</span><span class="p">,</span> <span class="n">uniq_celltypes_nwcs</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;merfish_heatmap_nwcs.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_31_0.png" src="../_images/results_nb2.consensus_merfish_31_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[156]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">uniq_celltypes_nwcs</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">uniq_celltypes_nwcs</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">cell_type</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">uniq_celltypes_nwcs</span><span class="p">):</span>
+    <span class="n">cl_vecs</span> <span class="o">=</span> <span class="n">sorted_cbg</span><span class="p">[</span><span class="n">calls_nwcs</span><span class="o">.</span><span class="n">subclass</span> <span class="o">==</span> <span class="n">cell_type</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cl_vecs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">cl_vecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cl_vecs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cl_vecs</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">cl_vecs</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">30</span><span class="p">:],</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cut</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">cell_type</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">sorted_genes</span><span class="p">[</span><span class="o">-</span><span class="mi">30</span><span class="p">:],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_32_0.png" src="../_images/results_nb2.consensus_merfish_32_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_colors_nwcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell_class_colors</span><span class="p">[</span><span class="n">ct</span><span class="p">]</span> <span class="k">for</span> <span class="n">ct</span> <span class="ow">in</span> <span class="n">uniq_celltypes_nwcs</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-11-bb2957d2c7e3&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>map_colors_nwcs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>cell_class_colors<span class="ansi-blue-fg">[</span>ct<span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">for</span> ct <span class="ansi-green-fg">in</span> uniq_celltypes_nwcs<span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-11-bb2957d2c7e3&gt;</span> in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-fg">(.0)</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>map_colors_nwcs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>cell_class_colors<span class="ansi-blue-fg">[</span>ct<span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">for</span> ct <span class="ansi-green-fg">in</span> uniq_celltypes_nwcs<span class="ansi-blue-fg">]</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;cell_class_colors&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">map_celltypes</span><span class="p">(</span><span class="n">centroids_nwcs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Generating cell-type map for centroid #0...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #1...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #2...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #3...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #4...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #5...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #6...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #7...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #8...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #9...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #10...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #11...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #12...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #13...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #14...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #15...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #16...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #17...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">filter_celltypemaps</span><span class="p">(</span><span class="n">min_norm</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">min_r</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">plot_celltypes_map</span><span class="p">(</span><span class="n">rotate</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">map_colors_nwcs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;MERFISH - NWCS (SSAM)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;MERFISH - NWCS (SSAM)&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_36_1.png" src="../_images/results_nb2.consensus_merfish_36_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">centroids</span> <span class="o">=</span> <span class="n">centroids_nwcs</span> <span class="c1"># TODO: this should not be necessary!</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">bin_celltypemaps</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">find_domains</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">merge_remote</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">merge_thres</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">norm_thres</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">plot_domains</span><span class="p">(</span><span class="n">rotate</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_40_0.png" src="../_images/results_nb2.consensus_merfish_40_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layer_annotations</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">inferred_domains</span><span class="p">[</span><span class="n">ds</span><span class="o">.</span><span class="n">local_maxs</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calls_gmcs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;consensus_calls/charles/merfish_jeremy_pciseq_renee_eeshit_yilin_gabriele_consensus_df.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">cl</span> <span class="o">==</span> <span class="s2">&quot;L23_IT&quot;</span><span class="p">:</span>
+        <span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span> <span class="o">==</span> <span class="s2">&quot;L23_IT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;L2/3 IT&quot;</span>
+    <span class="k">elif</span> <span class="s2">&quot;_&quot;</span> <span class="ow">in</span> <span class="n">cl</span><span class="p">:</span>
+        <span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span> <span class="o">==</span> <span class="n">cl</span><span class="p">]</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_576/1845947111.py:5: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  calls_gmcs.subclass.loc[calls_gmcs.subclass == cl] = cl.replace(&#34;_&#34;, &#34; &#34;)
+/tmp/ipykernel_576/1845947111.py:3: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  calls_gmcs.subclass.loc[calls_gmcs.subclass == &#34;L23_IT&#34;] = &#34;L2/3 IT&#34;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uniq_celltypes_gmcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">cl</span> <span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="n">cell_class_colors</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">cl</span> <span class="ow">in</span> <span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span><span class="o">.</span><span class="n">unique</span><span class="p">()]</span>
+<span class="n">centroids_gmcs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">cell_type</span> <span class="ow">in</span> <span class="n">uniq_celltypes_gmcs</span><span class="p">:</span>
+    <span class="n">centroids_gmcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cell_by_gene_normalized</span><span class="p">[</span><span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span> <span class="o">==</span> <span class="n">cell_type</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centroids_scaled_gmcs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">cell_type</span> <span class="ow">in</span> <span class="n">uniq_celltypes_gmcs</span><span class="p">:</span>
+    <span class="n">centroids_scaled_gmcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cell_by_gene_normalized_scaled</span><span class="p">[</span><span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span> <span class="o">==</span> <span class="n">cell_type</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">sorted_cbg</span><span class="p">,</span> <span class="n">sorted_genes</span> <span class="o">=</span> <span class="n">sort_genes</span><span class="p">(</span><span class="n">centroids_scaled_gmcs</span><span class="p">,</span> <span class="n">cell_by_gene_normalized_scaled</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">genes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell_class_colors</span><span class="p">[</span><span class="n">ct</span><span class="p">]</span> <span class="k">for</span> <span class="n">ct</span> <span class="ow">in</span> <span class="n">uniq_celltypes_gmcs</span><span class="p">]</span>
+<span class="n">plot_heatmap</span><span class="p">(</span><span class="n">sorted_cbg</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sorted_genes</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">calls_gmcs</span><span class="p">,</span> <span class="n">uniq_celltypes_gmcs</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;merfish_heatmap_gmcs.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_46_0.png" src="../_images/results_nb2.consensus_merfish_46_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">uniq_celltypes_gmcs</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">uniq_celltypes_gmcs</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">cell_type</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">uniq_celltypes_gmcs</span><span class="p">):</span>
+    <span class="n">cl_vecs</span> <span class="o">=</span> <span class="n">cell_by_gene_normalized_scaled</span><span class="p">[</span><span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span> <span class="o">==</span> <span class="n">cell_type</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cl_vecs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">cl_vecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cl_vecs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cl_vecs</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">cl_vecs</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">cell_type</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">genes</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_47_0.png" src="../_images/results_nb2.consensus_merfish_47_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_colors_gmcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell_class_colors</span><span class="p">[</span><span class="n">ct</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L23&quot;</span><span class="p">,</span> <span class="s2">&quot;L2/3&quot;</span><span class="p">)]</span> <span class="k">for</span> <span class="n">ct</span> <span class="ow">in</span> <span class="n">uniq_celltypes_gmcs</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[150]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">map_celltypes</span><span class="p">(</span><span class="n">centroids_gmcs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Generating cell-type map for centroid #0...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #1...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #2...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #3...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #4...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #5...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #6...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #7...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #8...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #9...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #10...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #11...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #12...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #13...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+Generating cell-type map for centroid #14...
+Processing chunk (0/3)...
+Processing chunk (1/3)...
+Processing chunk (2/3)...
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[151]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis</span><span class="o">.</span><span class="n">filter_celltypemaps</span><span class="p">(</span><span class="n">min_norm</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">min_r</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[152]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">plot_celltypes_map</span><span class="p">(</span><span class="n">rotate</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">map_colors_gmcs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;MERFISH - GMCS (SSAM)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[152]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;MERFISH - GMCS (SSAM)&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_51_1.png" src="../_images/results_nb2.consensus_merfish_51_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">closest_nwcs_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">closest_nwcs_clusters_r</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">closest_gmcs_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">closest_gmcs_clusters_r</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">normalized_vectors</span><span class="p">:</span>
+    <span class="n">corrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ssam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">centroids_nwcs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centroids_nwcs</span><span class="p">))]</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">corrs</span><span class="p">)</span>
+    <span class="n">closest_nwcs_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uniq_celltypes_nwcs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="n">closest_nwcs_clusters_r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corrs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+    <span class="n">corrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ssam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">centroids_gmcs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centroids_gmcs</span><span class="p">))]</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">corrs</span><span class="p">)</span>
+    <span class="n">closest_gmcs_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uniq_celltypes_gmcs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="n">closest_gmcs_clusters_r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corrs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">normalized_vectors</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">genes</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;merfish_ssam_localmax_expression.csv&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">local_maxs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">local_maxs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;closest_consensus_nwcs_cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">closest_nwcs_clusters</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;closest_consensus_nwcs_cluster_r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">closest_nwcs_clusters_r</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;closest_consensus_gmcs_cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">closest_gmcs_clusters</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;closest_consensus_gmcs_cluster_r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">closest_gmcs_clusters_r</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;layer_annotations_nwcs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer_annotations</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;merfish_ssam_localmax_metadata_with_layer.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[155]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">ConvexHull</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">good_ids</span> <span class="o">=</span> <span class="n">cell_by_gene</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">cid</span><span class="p">,</span> <span class="n">sdf</span> <span class="ow">in</span> <span class="n">locations</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;cell&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">good_ids</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">hull</span> <span class="o">=</span> <span class="n">ConvexHull</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">hull</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">hull</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">cell_class_colors</span><span class="p">[</span><span class="n">calls_nwcs</span><span class="o">.</span><span class="n">subclass</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;MERFISH - NWCS&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[155]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;MERFISH - NWCS&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_53_1.png" src="../_images/results_nb2.consensus_merfish_53_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[154]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">ConvexHull</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">good_ids</span> <span class="o">=</span> <span class="n">cell_by_gene</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">cid</span><span class="p">,</span> <span class="n">sdf</span> <span class="ow">in</span> <span class="n">locations</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;cell&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">good_ids</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">hull</span> <span class="o">=</span> <span class="n">ConvexHull</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">hull</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">hull</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">cell_class_colors</span><span class="p">[</span><span class="n">calls_gmcs</span><span class="o">.</span><span class="n">subclass</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L23&quot;</span><span class="p">,</span> <span class="s2">&quot;L2/3&quot;</span><span class="p">)],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;MERFISH - GMCS&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[154]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;MERFISH - GMCS&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_nb2.consensus_merfish_54_1.png" src="../_images/results_nb2.consensus_merfish_54_1.png" />
+</div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+  <div id="footer">
+    <p class="copyright">
+      © 2022 SpaceTx consortium<br>
+    </p>
+  </div>
+
+  </body>
+</html>
