@@ -1,0 +1,1184 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+<title>SpaceTx: experimental and computational methods compartison for spatially resolved transcriptomics</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CZI Mouse : Dimensionality Reduction and Clustering with SIMLR" href="mouse-clustering_notebook.html" />
+    <link rel="prev" title="Software, Data Visualization and Example Notebooks" href="../results-dataviz.html" /> 
+  </head><body>
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light">
+    <div class="container pt-2 pb-4">
+      <a class="navbar-brand" href="../index.html"><img id="main-logo" src="/_static/spacetx_logo_web_black.svg"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div id="main-menubar" class="container-fluid">
+      <div class="container position-relative">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-between">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                About
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="../about.html">SpaceTx</a></li>
+                <li><a class="dropdown-item" href="../people.html">People</a></li>
+                <li><a class="dropdown-item" href="../spacejam.html">SpaceJam Hackathon</a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link" href="../data.html">Data</a></li>
+            <li><a class="nav-link" href="../results.html">Results and Analysis</a></li>
+            <li><a class="nav-link" href="../publications.html">Publications</a></li>
+            <li><a class="nav-link" href="../contribute.html">Contributing Guidelines</a></li>
+          </ul>
+          <form class="d-flex mb-4" id="main-search" action="../search.html" method="get">
+            <input class="form-control form-control-sm me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+            <button class="btn btn-success btn-sm" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+    <div id="wrapper">
+      <div id="main" class="container">
+        <div class="sidebar">
+        </div>
+        <div id="content">
+          
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="CZI-Human-:-Dimensionality-Reduction-and-Clustering-with-SIMLR">
+<h1>CZI Human : Dimensionality Reduction and Clustering with SIMLR<a class="headerlink" href="#CZI-Human-:-Dimensionality-Reduction-and-Clustering-with-SIMLR" title="Permalink to this heading">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="s">&#39;SIMLR&#39;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Rcpp</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Matrix</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">pracma</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">RcppAnnoy</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">RSpectra</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="s">&#39;Rtsne&#39;</span><span class="p">)</span>
+<span class="c1"># load the igraph package to compute the NMI</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">igraph</span><span class="p">)</span>
+
+<span class="c1"># load the palettes for the plots</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">grDevices</span><span class="p">)</span>
+
+<span class="c1"># load the SIMLR R package</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;SIMLR/R/SIMLR_Large_Scale.R&quot;</span><span class="p">)</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;SIMLR/R/utils.simlr.large.scale.R&quot;</span><span class="p">)</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;SIMLR/R/utils.simlr.R&quot;</span><span class="p">)</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;SIMLR/R/SIMLR.Rtsne.R&quot;</span><span class="p">)</span>
+
+<span class="c1"># load the C file</span>
+
+<span class="c1"># NOTE 1: we make use of an external C program during the computations of SIMLR.</span>
+<span class="c1"># The code is located in the R directory in the file projsplx_R.c. In order to</span>
+<span class="c1"># use SIMLR one needs to compite the program. To do so, one needs to run on the</span>
+<span class="c1"># shell the command R CMD SHLIB -c projsplx_R.c.</span>
+<span class="c1"># The precompiled projsplx_R.so is already provided for MAC OS X only.</span>
+<span class="c1"># If one wants to use SIMLR on other operative systems, the file projsplx_R.so</span>
+<span class="c1"># needs to be deleted, and re-compiled.</span>
+
+<span class="c1"># NOTE 2: for Windows, the command dyn.load(&quot;./R/projsplx_R.so&quot;) needs to be</span>
+<span class="c1"># substituted with the command dyn.load(&quot;./R/projsplx_R.dll&quot;).</span>
+
+<span class="nf">dyn.load</span><span class="p">(</span><span class="s">&quot;SIMLR/R/projsplx_R.so&quot;</span><span class="p">)</span>
+
+<span class="nf">sourceCpp</span><span class="p">(</span><span class="s">&quot;SIMLR/src/Rtsne.cpp&quot;</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Attaching package: &#39;pracma&#39;
+
+The following objects are masked from &#39;package:Matrix&#39;:
+
+    expm, lu, tril, triu
+
+
+Attaching package: &#39;igraph&#39;
+
+The following objects are masked from &#39;package:stats&#39;:
+
+    decompose, spectrum
+
+The following object is masked from &#39;package:base&#39;:
+
+    union
+
+</pre></div></div>
+</div>
+<section id="Input">
+<h2>Input<a class="headerlink" href="#Input" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">if</span><span class="p">(</span><span class="kc">FALSE</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1"># X = as.matrix(read.csv(&quot;FILENAME&quot;, row.names = 1, header= TRUE , sep=&#39;\t&#39;))</span>
+<span class="n">exon_matrix</span> <span class="o">=</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./human_MTG/exons-table.csv&quot;</span><span class="p">,</span> <span class="n">row.names</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span> <span class="kc">TRUE</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&#39;,&#39;</span> <span class="p">))</span>
+<span class="n">intron_matrix</span> <span class="o">=</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./human_MTG/introns-table.csv&quot;</span><span class="p">,</span> <span class="n">row.names</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span> <span class="kc">TRUE</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&#39;,&#39;</span> <span class="p">))</span>
+
+<span class="n">human_matrix</span> <span class="o">=</span> <span class="n">exon_matrix</span><span class="o">+</span><span class="n">intron_matrix</span>
+
+<span class="c1">#mouse_counts = mouse_matrix[,c(1:20)]</span>
+<span class="n">human_counts</span> <span class="o">=</span> <span class="n">human_matrix</span>
+
+<span class="n">human_norm</span> <span class="o">=</span> <span class="nf">sweep</span><span class="p">(</span><span class="n">human_counts</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="nf">colSums</span><span class="p">(</span><span class="n">human_counts</span><span class="p">),</span><span class="n">`/`</span><span class="p">)</span>
+
+<span class="n">human_tpm</span> <span class="o">=</span> <span class="m">1e6</span><span class="o">*</span><span class="n">human_norm</span>
+<span class="n">human_log</span> <span class="o">=</span> <span class="nf">log2</span><span class="p">(</span><span class="n">human_tpm</span><span class="m">+1</span><span class="p">)</span>
+
+<span class="n">human_matrix</span> <span class="o">=</span> <span class="n">human_log</span>
+
+<span class="n">human_matrix</span> <span class="o">&lt;-</span> <span class="n">human_matrix</span><span class="p">[,</span><span class="nf">colSums</span><span class="p">(</span><span class="n">human_matrix</span> <span class="o">!=</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="m">0</span><span class="p">]</span>
+
+<span class="nf">saveRDS</span><span class="p">(</span><span class="n">human_matrix</span> <span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;human_matrix.Rdata&quot;</span><span class="p">)</span>
+<span class="c1">#readRDS(&quot;results/edv_simlr_clustering_v2018-001-224952.Rdata&quot;)</span>
+<span class="p">}</span>
+
+
+<span class="n">human_matrix</span> <span class="o">=</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;human_matrix.Rdata&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Select-Autosomal-Genes">
+<h2>Select Autosomal Genes<a class="headerlink" href="#Select-Autosomal-Genes" title="Permalink to this heading">¶</a></h2>
+<p>Since there are both male and female donors</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">human_genes</span> <span class="o">=</span> <span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./human_MTG/rows-genes.csv&quot;</span><span class="p">,</span> <span class="n">row.names</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span> <span class="kc">TRUE</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&#39;,&#39;</span> <span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">autosomal_genes_1</span> <span class="o">=</span> <span class="n">human_genes</span><span class="p">[</span><span class="o">!</span><span class="p">(</span><span class="n">human_genes</span><span class="o">$</span><span class="n">chromosome</span><span class="o">==</span><span class="s">&#39;X&#39;</span> <span class="o">|</span> <span class="n">human_genes</span><span class="o">$</span><span class="n">chromosome</span><span class="o">==</span><span class="s">&#39;Y&#39;</span><span class="p">),]</span>
+<span class="n">autosomal_genes_2</span><span class="o">=</span><span class="n">autosomal_genes_1</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">)]</span>
+
+<span class="n">human_matrix_autosomal</span> <span class="o">=</span> <span class="n">human_matrix</span><span class="p">[</span><span class="n">autosomal_genes_2</span><span class="p">,]</span>
+<span class="n">autosomal_genes</span> <span class="o">=</span> <span class="p">(</span><span class="nf">as.list</span><span class="p">(</span><span class="nf">row.names</span><span class="p">(</span><span class="n">human_matrix_autosomal</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mitochondrial_genes</span> <span class="o">=</span> <span class="nf">as.list</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./human_MTG/mito_genes.txt&quot;</span> <span class="p">,</span> <span class="n">row.names</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span> <span class="kc">FALSE</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&#39;\t&#39;</span><span class="p">))</span>
+<span class="n">mitochondrial_genes</span> <span class="o">=</span> <span class="p">(</span><span class="n">mitochondrial_genes</span><span class="o">$</span><span class="n">V1</span><span class="p">)</span>
+<span class="n">mitochondrial_genes</span> <span class="o">=</span> <span class="nf">as.list</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">mitochondrial_genes</span><span class="p">))</span>
+<span class="n">final_list</span> <span class="o">=</span> <span class="nf">as.factor</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="nf">setdiff</span><span class="p">(</span><span class="n">autosomal_genes</span> <span class="p">,</span> <span class="n">mitochondrial_genes</span> <span class="p">)))</span>
+<span class="n">human_matrix_final</span> <span class="o">=</span> <span class="p">(</span><span class="n">human_matrix_autosomal</span><span class="p">[</span><span class="n">final_list</span><span class="p">,])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">human_matrix_final</span> <span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;human_matrix_final.Rdata&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Dimensionality-reduction-and-clustering">
+<h2>Dimensionality reduction and clustering<a class="headerlink" href="#Dimensionality-reduction-and-clustering" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n_clust</span> <span class="o">=</span> <span class="m">36</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">11111</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Performing analysis for the Human dataset&quot;</span><span class="p">,</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="n">res_large_scale</span> <span class="o">=</span> <span class="nf">SIMLR_Large_Scale</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">human_matrix_final</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">n_clust</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="m">50</span><span class="p">,</span><span class="n">kk</span><span class="o">=</span><span class="m">400</span><span class="p">)</span>
+
+
+
+
+
+<span class="n">path</span> <span class="o">&lt;-</span> <span class="s">&quot;results/human/edv_simlr_clustering_v&quot;</span>
+<span class="n">time</span> <span class="o">&lt;-</span> <span class="nf">format</span><span class="p">(</span><span class="nf">Sys.time</span><span class="p">(),</span> <span class="n">format</span> <span class="o">=</span> <span class="s">&quot;%Y-%j-%H%M%S&quot;</span><span class="p">)</span>
+
+
+<span class="nf">saveRDS</span><span class="p">(</span><span class="n">res_large_scale</span> <span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="nf">paste0</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">time</span> <span class="p">,</span> <span class="s">&quot;.RData&quot;</span><span class="p">))</span>
+
+<span class="nf">pdf</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="nf">paste0</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">time</span> <span class="p">,</span> <span class="s">&quot;.pdf&quot;</span><span class="p">))</span>
+<span class="c1"># make the scatterd plots</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">res_large_scale</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="n">n_clust</span><span class="p">))[</span><span class="n">res_large_scale</span><span class="o">$</span><span class="n">y</span><span class="o">$</span><span class="n">cluster</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for Zelsel&quot;</span><span class="p">)</span>
+<span class="nf">dev.off</span><span class="p">()</span>
+
+<span class="c1">#readRDS(&quot;results/edv_simlr_clustering_v2018-001-224952.Rdata&quot;)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Performing analysis for the Mouse dataset
+Performing fast PCA.
+Performing k-nearest neighbour search.
+Computing the multiple Kernels.
+Performing the iterative procedure  10  times.
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Iteration:  4
+Iteration:  5
+Iteration:  6
+Iteration:  7
+Iteration:  8
+Iteration:  9
+Iteration:  10
+Performing Kmeans.
+Performing t-SNE.
+The main loop will be now performed with a maximum of 300 iterations.
+Performing iteration 1.
+Performing iteration 2.
+Performing iteration 3.
+Performing iteration 4.
+Performing iteration 5.
+Performing iteration 6.
+Performing iteration 7.
+Performing iteration 8.
+Performing iteration 9.
+Performing iteration 10.
+Performing iteration 11.
+Performing iteration 12.
+Performing iteration 13.
+Performing iteration 14.
+Performing iteration 15.
+Performing iteration 16.
+Performing iteration 17.
+Performing iteration 18.
+Performing iteration 19.
+Performing iteration 20.
+Performing iteration 21.
+Performing iteration 22.
+Performing iteration 23.
+Performing iteration 24.
+Performing iteration 25.
+Performing iteration 26.
+Performing iteration 27.
+Performing iteration 28.
+Performing iteration 29.
+Performing iteration 30.
+Performing iteration 31.
+Performing iteration 32.
+Performing iteration 33.
+Performing iteration 34.
+Performing iteration 35.
+Performing iteration 36.
+Performing iteration 37.
+Performing iteration 38.
+Performing iteration 39.
+Performing iteration 40.
+Performing iteration 41.
+Performing iteration 42.
+Performing iteration 43.
+Performing iteration 44.
+Performing iteration 45.
+Performing iteration 46.
+Performing iteration 47.
+Performing iteration 48.
+Performing iteration 49.
+Performing iteration 50.
+Performing iteration 51.
+Performing iteration 52.
+Performing iteration 53.
+Performing iteration 54.
+Performing iteration 55.
+Performing iteration 56.
+Performing iteration 57.
+Performing iteration 58.
+Performing iteration 59.
+Performing iteration 60.
+Performing iteration 61.
+Performing iteration 62.
+Performing iteration 63.
+Performing iteration 64.
+Performing iteration 65.
+Performing iteration 66.
+Performing iteration 67.
+Performing iteration 68.
+Performing iteration 69.
+Performing iteration 70.
+Performing iteration 71.
+Performing iteration 72.
+Performing iteration 73.
+Performing iteration 74.
+Performing iteration 75.
+Performing iteration 76.
+Performing iteration 77.
+Performing iteration 78.
+Performing iteration 79.
+Performing iteration 80.
+Performing iteration 81.
+Performing iteration 82.
+Performing iteration 83.
+Performing iteration 84.
+Performing iteration 85.
+Performing iteration 86.
+Performing iteration 87.
+Performing iteration 88.
+Performing iteration 89.
+Performing iteration 90.
+Performing iteration 91.
+Performing iteration 92.
+Performing iteration 93.
+Performing iteration 94.
+Performing iteration 95.
+Performing iteration 96.
+Performing iteration 97.
+Performing iteration 98.
+Performing iteration 99.
+Performing iteration 100.
+Performing iteration 101.
+Performing iteration 102.
+Performing iteration 103.
+Performing iteration 104.
+Performing iteration 105.
+Performing iteration 106.
+Performing iteration 107.
+Performing iteration 108.
+Performing iteration 109.
+Performing iteration 110.
+Performing iteration 111.
+Performing iteration 112.
+Performing iteration 113.
+Performing iteration 114.
+Performing iteration 115.
+Performing iteration 116.
+Performing iteration 117.
+Performing iteration 118.
+Performing iteration 119.
+Performing iteration 120.
+Performing iteration 121.
+Performing iteration 122.
+Performing iteration 123.
+Performing iteration 124.
+Performing iteration 125.
+Performing iteration 126.
+Performing iteration 127.
+Performing iteration 128.
+Performing iteration 129.
+Performing iteration 130.
+Performing iteration 131.
+Performing iteration 132.
+Performing iteration 133.
+Performing iteration 134.
+Performing iteration 135.
+Performing iteration 136.
+Performing iteration 137.
+Performing iteration 138.
+Performing iteration 139.
+Performing iteration 140.
+Performing iteration 141.
+Performing iteration 142.
+Performing iteration 143.
+Performing iteration 144.
+Performing iteration 145.
+Performing iteration 146.
+Performing iteration 147.
+Performing iteration 148.
+Performing iteration 149.
+Performing iteration 150.
+Performing iteration 151.
+Performing iteration 152.
+Performing iteration 153.
+Performing iteration 154.
+Performing iteration 155.
+Performing iteration 156.
+Performing iteration 157.
+Performing iteration 158.
+Performing iteration 159.
+Performing iteration 160.
+Performing iteration 161.
+Performing iteration 162.
+Performing iteration 163.
+Performing iteration 164.
+Performing iteration 165.
+Performing iteration 166.
+Performing iteration 167.
+Performing iteration 168.
+Performing iteration 169.
+Performing iteration 170.
+Performing iteration 171.
+Performing iteration 172.
+Performing iteration 173.
+Performing iteration 174.
+Performing iteration 175.
+Performing iteration 176.
+Performing iteration 177.
+Performing iteration 178.
+Performing iteration 179.
+Performing iteration 180.
+Performing iteration 181.
+Performing iteration 182.
+Performing iteration 183.
+Performing iteration 184.
+Performing iteration 185.
+Performing iteration 186.
+Performing iteration 187.
+Performing iteration 188.
+Performing iteration 189.
+Performing iteration 190.
+Performing iteration 191.
+Performing iteration 192.
+Performing iteration 193.
+Performing iteration 194.
+Performing iteration 195.
+Performing iteration 196.
+Performing iteration 197.
+Performing iteration 198.
+Performing iteration 199.
+Performing iteration 200.
+Performing iteration 201.
+Performing iteration 202.
+Performing iteration 203.
+Performing iteration 204.
+Performing iteration 205.
+Performing iteration 206.
+Performing iteration 207.
+Performing iteration 208.
+Performing iteration 209.
+Performing iteration 210.
+Performing iteration 211.
+Performing iteration 212.
+Performing iteration 213.
+Performing iteration 214.
+Performing iteration 215.
+Performing iteration 216.
+Performing iteration 217.
+Performing iteration 218.
+Performing iteration 219.
+Performing iteration 220.
+Performing iteration 221.
+Performing iteration 222.
+Performing iteration 223.
+Performing iteration 224.
+Performing iteration 225.
+Performing iteration 226.
+Performing iteration 227.
+Performing iteration 228.
+Performing iteration 229.
+Performing iteration 230.
+Performing iteration 231.
+Performing iteration 232.
+Performing iteration 233.
+Performing iteration 234.
+Performing iteration 235.
+Performing iteration 236.
+Performing iteration 237.
+Performing iteration 238.
+Performing iteration 239.
+Performing iteration 240.
+Performing iteration 241.
+Performing iteration 242.
+Performing iteration 243.
+Performing iteration 244.
+Performing iteration 245.
+Performing iteration 246.
+Performing iteration 247.
+Performing iteration 248.
+Performing iteration 249.
+Performing iteration 250.
+Performing iteration 251.
+Performing iteration 252.
+Performing iteration 253.
+Performing iteration 254.
+Performing iteration 255.
+Performing iteration 256.
+Performing iteration 257.
+Performing iteration 258.
+Performing iteration 259.
+Performing iteration 260.
+Performing iteration 261.
+Performing iteration 262.
+Performing iteration 263.
+Performing iteration 264.
+Performing iteration 265.
+Performing iteration 266.
+Performing iteration 267.
+Performing iteration 268.
+Performing iteration 269.
+Performing iteration 270.
+Performing iteration 271.
+Performing iteration 272.
+Performing iteration 273.
+Performing iteration 274.
+Performing iteration 275.
+Performing iteration 276.
+Performing iteration 277.
+Performing iteration 278.
+Performing iteration 279.
+Performing iteration 280.
+Performing iteration 281.
+Performing iteration 282.
+Performing iteration 283.
+Performing iteration 284.
+Performing iteration 285.
+Performing iteration 286.
+Performing iteration 287.
+Performing iteration 288.
+Performing iteration 289.
+Performing iteration 290.
+Performing iteration 291.
+Performing iteration 292.
+Performing iteration 293.
+Performing iteration 294.
+Performing iteration 295.
+Performing iteration 296.
+Performing iteration 297.
+Performing iteration 298.
+Performing iteration 299.
+Performing iteration 300.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<strong>png:</strong> 2</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span> <span class="nf">plot</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="nf">dim</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="bp">F</span><span class="p">)[</span><span class="m">2</span><span class="p">]))[</span><span class="n">results</span><span class="o">$</span><span class="n">y</span><span class="o">$</span><span class="n">cluster</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for Zelsel&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_human-clustering_notebook_11_0.png" src="../_images/results_human-clustering_notebook_11_0.png" />
+</div>
+</div>
+</section>
+<section id="Looking-for-140-clusters">
+<h2>Looking for 140 clusters<a class="headerlink" href="#Looking-for-140-clusters" title="Permalink to this heading">¶</a></h2>
+<p>Since that is the number in the cl.csv example file</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">=</span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;results/human/edv_simlr_clustering_n42_v2018-009-102720.RData&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[141]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">$</span><span class="n">y</span> <span class="o">=</span> <span class="nf">kmeans</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="bp">F</span><span class="p">,</span><span class="m">45</span><span class="p">,</span><span class="n">nstart</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[144]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="m">140</span><span class="p">))[</span><span class="n">results</span><span class="o">$</span><span class="n">y</span><span class="o">$</span><span class="n">cluster</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for CZI Mouse - 140 clusters&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_human-clustering_notebook_15_0.png" src="../_images/results_human-clustering_notebook_15_0.png" />
+</div>
+</div>
+</section>
+<section id="Louvain-Clustering">
+<h2>Louvain Clustering<a class="headerlink" href="#Louvain-Clustering" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[103]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">names</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+<span class="nf">class</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">y</span><span class="o">$</span><span class="n">cluster</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<ol class=list-inline>
+    <li>'y'</li>
+    <li>'S0'</li>
+    <li>'F'</li>
+    <li>'ydata'</li>
+    <li>'alphaK'</li>
+    <li>'val'</li>
+    <li>'ind'</li>
+    <li>'execution.time'</li>
+</ol></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+'integer'</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Loading required package: ggplot2
+Loading required package: cowplot
+
+Attaching package: &#39;cowplot&#39;
+
+The following object is masked from &#39;package:ggplot2&#39;:
+
+    ggsave
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">human_matrix</span> <span class="o">=</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;human_matrix.Rdata&quot;</span><span class="p">)</span>
+<span class="n">czi_human_simlr</span> <span class="o">&lt;-</span> <span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">raw.data</span> <span class="o">=</span> <span class="n">human_matrix</span><span class="p">,</span>  <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;CZI&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">simlr_embeddings</span> <span class="o">=</span> <span class="n">results</span><span class="o">$</span><span class="bp">F</span>
+<span class="nf">str</span><span class="p">(</span><span class="n">simlr_embeddings</span><span class="p">)</span>
+<span class="nf">row.names</span><span class="p">(</span><span class="n">simlr_embeddings</span><span class="p">)</span> <span class="o">=</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">human_matrix</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">simlr_embeddings</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;SIMLR&quot;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="nf">dim</span><span class="p">(</span><span class="n">simlr_embeddings</span><span class="p">)[</span><span class="m">2</span><span class="p">])</span>
+
+
+<span class="n">czi_human_simlr</span> <span class="o">&lt;-</span> <span class="nf">SetDimReduction</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">czi_human_simlr</span><span class="p">,</span> <span class="n">reduction.type</span> <span class="o">=</span> <span class="s">&quot;simlr&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;cell.embeddings&quot;</span><span class="p">,</span>
+    <span class="n">new.data</span> <span class="o">=</span> <span class="n">simlr_embeddings</span><span class="p">)</span>
+<span class="n">czi_human_simlr</span> <span class="o">&lt;-</span> <span class="nf">SetDimReduction</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">czi_human_simlr</span><span class="p">,</span> <span class="n">reduction.type</span> <span class="o">=</span> <span class="s">&quot;simlr&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;key&quot;</span><span class="p">,</span>
+    <span class="n">new.data</span> <span class="o">=</span> <span class="s">&quot;SIMLR&quot;</span><span class="p">)</span>
+<span class="n">czi_human_simlr</span> <span class="o">&lt;-</span> <span class="nf">FindClusters</span><span class="p">(</span><span class="n">czi_human_simlr</span><span class="p">,</span> <span class="n">reduction.type</span> <span class="o">=</span> <span class="s">&quot;simlr&quot;</span><span class="p">,</span> <span class="n">dims.use</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">45</span><span class="p">,</span> <span class="n">save.SNN</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ num [1:15928, 1:45] 3.32e-16 -3.65e-16 7.44e-16 3.69e-16 -3.42e-09 ...
+[1] &#34;Constructing SNN&#34;
+  |======================================================================| 100%
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">czi_human_simlr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Formal class &#39;seurat&#39; [package &#34;Seurat&#34;] with 20 slots
+  ..@ raw.data    : num [1:50281, 1:15928] 0 0 0 0 0 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:50281] &#34;3.8-1.2&#34; &#34;3.8-1.3&#34; &#34;3.8-1.4&#34; &#34;3.8-1.5&#34; ...
+  .. .. ..$ : chr [1:15928] &#34;LS.15005h_S01_E1.50&#34; &#34;LS.15005h_S02_E1.50&#34; &#34;LS.15005h_S03_E1.50&#34; &#34;LS.15005h_S04_E1.50&#34; ...
+  ..@ data        : num [1:50281, 1:15928] 0 0 0 0 0 ...
+  .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. ..$ : chr [1:50281] &#34;3.8-1.2&#34; &#34;3.8-1.3&#34; &#34;3.8-1.4&#34; &#34;3.8-1.5&#34; ...
+  .. .. ..$ : chr [1:15928] &#34;LS.15005h_S01_E1.50&#34; &#34;LS.15005h_S02_E1.50&#34; &#34;LS.15005h_S03_E1.50&#34; &#34;LS.15005h_S04_E1.50&#34; ...
+  ..@ scale.data  : NULL
+  ..@ var.genes   : logi(0)
+  ..@ is.expr     : num 0
+  ..@ ident       : Factor w/ 59 levels &#34;0&#34;,&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,..: 4 7 27 9 35 9 13 47 24 2 ...
+  .. ..- attr(*, &#34;names&#34;)= chr [1:15928] &#34;LS.15005h_S01_E1.50&#34; &#34;LS.15005h_S02_E1.50&#34; &#34;LS.15005h_S03_E1.50&#34; &#34;LS.15005h_S04_E1.50&#34; ...
+  ..@ meta.data   :&#39;data.frame&#39;:        15928 obs. of  4 variables:
+  .. ..$ nGene     : num [1:15928] 7832 8821 10058 9307 10769 ...
+  .. ..$ nUMI      : num [1:15928] 33668 39045 39072 36290 42124 ...
+  .. ..$ orig.ident: Factor w/ 1 level &#34;CZI&#34;: 1 1 1 1 1 1 1 1 1 1 ...
+  .. ..$ res.0.8   : chr [1:15928] &#34;3&#34; &#34;6&#34; &#34;26&#34; &#34;8&#34; ...
+  ..@ project.name: chr &#34;CZI&#34;
+  ..@ dr          :List of 1
+  .. ..$ simlr:Formal class &#39;dim.reduction&#39; [package &#34;Seurat&#34;] with 7 slots
+  .. .. .. ..@ cell.embeddings   : num [1:15928, 1:45] 3.32e-16 -3.65e-16 7.44e-16 3.69e-16 -3.42e-09 ...
+  .. .. .. .. ..- attr(*, &#34;dimnames&#34;)=List of 2
+  .. .. .. .. .. ..$ : chr [1:15928] &#34;LS.15005h_S01_E1.50&#34; &#34;LS.15005h_S02_E1.50&#34; &#34;LS.15005h_S03_E1.50&#34; &#34;LS.15005h_S04_E1.50&#34; ...
+  .. .. .. .. .. ..$ : chr [1:45] &#34;SIMLR1&#34; &#34;SIMLR2&#34; &#34;SIMLR3&#34; &#34;SIMLR4&#34; ...
+  .. .. .. ..@ gene.loadings     : num[0 , 0 ]
+  .. .. .. ..@ gene.loadings.full: num[0 , 0 ]
+  .. .. .. ..@ sdev              : num(0)
+  .. .. .. ..@ key               : chr &#34;SIMLR&#34;
+  .. .. .. ..@ jackstraw         : NULL
+  .. .. .. ..@ misc              : NULL
+  ..@ assay       : list()
+  ..@ hvg.info    :&#39;data.frame&#39;:        0 obs. of  0 variables
+Formal class &#39;data.frame&#39; [package &#34;methods&#34;] with 4 slots
+  .. .. ..@ .Data    : list()
+  .. .. ..@ names    : chr(0)
+  .. .. ..@ row.names: int(0)
+  .. .. ..@ .S3Class : chr &#34;data.frame&#34;
+  ..@ imputed     :&#39;data.frame&#39;:        0 obs. of  0 variables
+Formal class &#39;data.frame&#39; [package &#34;methods&#34;] with 4 slots
+  .. .. ..@ .Data    : list()
+  .. .. ..@ names    : chr(0)
+  .. .. ..@ row.names: int(0)
+  .. .. ..@ .S3Class : chr &#34;data.frame&#34;
+  ..@ cell.names  : chr [1:15928] &#34;LS.15005h_S01_E1.50&#34; &#34;LS.15005h_S02_E1.50&#34; &#34;LS.15005h_S03_E1.50&#34; &#34;LS.15005h_S04_E1.50&#34; ...
+  ..@ cluster.tree: list()
+  ..@ snn         :Formal class &#39;dgCMatrix&#39; [package &#34;Matrix&#34;] with 6 slots
+  .. .. ..@ i       : int [1:1134338] 0 98 592 1155 1333 1525 1539 2123 2853 2953 ...
+  .. .. ..@ p       : int [1:15929] 0 34 134 189 268 416 490 554 629 713 ...
+  .. .. ..@ Dim     : int [1:2] 15928 15928
+  .. .. ..@ Dimnames:List of 2
+  .. .. .. ..$ : chr [1:15928] &#34;LS.15005h_S01_E1.50&#34; &#34;LS.15005h_S02_E1.50&#34; &#34;LS.15005h_S03_E1.50&#34; &#34;LS.15005h_S04_E1.50&#34; ...
+  .. .. .. ..$ : chr [1:15928] &#34;LS.15005h_S01_E1.50&#34; &#34;LS.15005h_S02_E1.50&#34; &#34;LS.15005h_S03_E1.50&#34; &#34;LS.15005h_S04_E1.50&#34; ...
+  .. .. ..@ x       : num [1:1134338] 1 0.818 0.5 0.714 0.667 ...
+  .. .. ..@ factors : list()
+  ..@ calc.params :List of 3
+  .. ..$ CreateSeuratObject  :List of 13
+  .. .. ..$ project             : chr &#34;CZI&#34;
+  .. .. ..$ min.cells           : num 0
+  .. .. ..$ min.genes           : num 0
+  .. .. ..$ is.expr             : num 0
+  .. .. ..$ normalization.method: NULL
+  .. .. ..$ scale.factor        : num 10000
+  .. .. ..$ do.scale            : logi FALSE
+  .. .. ..$ do.center           : logi FALSE
+  .. .. ..$ names.field         : num 1
+  .. .. ..$ names.delim         : chr &#34;_&#34;
+  .. .. ..$ save.raw            : logi TRUE
+  .. .. ..$ display.progress    : logi TRUE
+  .. .. ..$ time                : POSIXct[1:1], format: &#34;2018-01-09 10:52:12&#34;
+  .. ..$ BuildSNN            :List of 9
+  .. .. ..$ genes.use     : NULL
+  .. .. ..$ reduction.type: chr &#34;simlr&#34;
+  .. .. ..$ dims.use      : int [1:45] 1 2 3 4 5 6 7 8 9 10 ...
+  .. .. ..$ k.param       : num 30
+  .. .. ..$ k.scale       : num 25
+  .. .. ..$ plot.SNN      : logi FALSE
+  .. .. ..$ prune.SNN     : num 0.0667
+  .. .. ..$ force.recalc  : logi FALSE
+  .. .. ..$ time          : POSIXct[1:1], format: &#34;2018-01-09 10:55:03&#34;
+  .. ..$ FindClusters.res.0.8:List of 20
+  .. .. ..$ genes.use         : NULL
+  .. .. ..$ reduction.type    : chr &#34;simlr&#34;
+  .. .. ..$ dims.use          : int [1:45] 1 2 3 4 5 6 7 8 9 10 ...
+  .. .. ..$ k.param           : num 30
+  .. .. ..$ k.scale           : num 25
+  .. .. ..$ plot.SNN          : logi FALSE
+  .. .. ..$ prune.SNN         : num 0.0667
+  .. .. ..$ print.output      : logi TRUE
+  .. .. ..$ distance.matrix   : NULL
+  .. .. ..$ save.SNN          : logi TRUE
+  .. .. ..$ reuse.SNN         : logi FALSE
+  .. .. ..$ force.recalc      : logi FALSE
+  .. .. ..$ modularity.fxn    : num 1
+  .. .. ..$ resolution        : num 0.8
+  .. .. ..$ algorithm         : num 1
+  .. .. ..$ n.start           : num 100
+  .. .. ..$ n.iter            : num 10
+  .. .. ..$ random.seed       : num 0
+  .. .. ..$ temp.file.location: NULL
+  .. .. ..$ time              : POSIXct[1:1], format: &#34;2018-01-09 11:04:08&#34;
+  ..@ kmeans      : NULL
+  ..@ spatial     :Formal class &#39;spatial.info&#39; [package &#34;Seurat&#34;] with 4 slots
+  .. .. ..@ mix.probs    :&#39;data.frame&#39;: 15928 obs. of  1 variable:
+  .. .. .. ..$ nGene: num [1:15928] 7832 8821 10058 9307 10769 ...
+  .. .. ..@ mix.param    :&#39;data.frame&#39;: 0 obs. of  0 variables
+Formal class &#39;data.frame&#39; [package &#34;methods&#34;] with 4 slots
+  .. .. .. .. ..@ .Data    : list()
+  .. .. .. .. ..@ names    : chr(0)
+  .. .. .. .. ..@ row.names: int(0)
+  .. .. .. .. ..@ .S3Class : chr &#34;data.frame&#34;
+  .. .. ..@ final.prob   :&#39;data.frame&#39;: 0 obs. of  0 variables
+Formal class &#39;data.frame&#39; [package &#34;methods&#34;] with 4 slots
+  .. .. .. .. ..@ .Data    : list()
+  .. .. .. .. ..@ names    : chr(0)
+  .. .. .. .. ..@ row.names: int(0)
+  .. .. .. .. ..@ .S3Class : chr &#34;data.frame&#34;
+  .. .. ..@ insitu.matrix:&#39;data.frame&#39;: 0 obs. of  0 variables
+Formal class &#39;data.frame&#39; [package &#34;methods&#34;] with 4 slots
+  .. .. .. .. ..@ .Data    : list()
+  .. .. .. .. ..@ names    : chr(0)
+  .. .. .. .. ..@ row.names: int(0)
+  .. .. .. .. ..@ .S3Class : chr &#34;data.frame&#34;
+  ..@ misc        : NULL
+  ..@ version     :Classes &#39;package_version&#39;, &#39;numeric_version&#39;  hidden list of 1
+  .. ..$ : int [1:3] 2 1 0
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[104]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">czi_mouse_simlr</span><span class="o">@</span><span class="n">ident</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+IOPub data rate exceeded.
+The notebook server will temporarily stop sending output
+to the client in order to avoid crashing it.
+To change this limit, set the config variable
+`--NotebookApp.iopub_data_rate_limit`.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="m">59</span><span class="p">))[</span><span class="n">czi_human_simlr</span><span class="o">@</span><span class="n">ident</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for CZI Mouse - Graph Clustering&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/results_human-clustering_notebook_23_0.png" src="../_images/results_human-clustering_notebook_23_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+  <div id="footer">
+    <p class="copyright">
+      © 2022 SpaceTx consortium<br>
+    </p>
+  </div>
+
+  </body>
+</html>
