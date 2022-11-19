@@ -3,8 +3,6 @@ Cell Type Mapping Consensus
 
 The SpaceTx cell type mapping strategies and combination of these results into consensus mapping results are described in detail in `Reference-based cell type matching of spatial transcriptomics data <https://doi.org/10.1101/2022.03.28.486139>`_.
 
-*summary Figure coming soon*
-
 Visium Data Single Cell Mapping
 -------------------------------
   
