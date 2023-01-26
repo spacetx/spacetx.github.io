@@ -1,6 +1,9 @@
 SpaceTx Publications
 --------------------
 
+- Consortium Paper
+    - Brian Long, Jeremy Miller, The SpaceTx Consortium, **"SpaceTx: A Roadmap for Benchmarking Spatial Transcriptomics Exploration of the Brain"**, *arXiv* 2301.08436 [q-bio.NC]; doi: https://doi.org/10.48550/arXiv.2301.08436
+
 - Combined Mapping Results
     - Yun Zhang, Jeremy A. Miller, Jeongbin Park, Boudewijn P. Lelieveldt, Brian D. Aevermann, Tommaso Biancalani, Charles Comiter, Christoffer Mattsson Langseth, Brian Long, Viktor Petukhov, Gabriele Scalia, Eeshit Dhaval Vaishnav, Yilin Zhao, Ed S. Lein, Richard H. Scheuermann, **"Reference-based cell type matching of spatial transcriptomics data"**, *bioRxiv* 2022.03.28.486139; doi: https://doi.org/10.1101/2022.03.28.486139
 

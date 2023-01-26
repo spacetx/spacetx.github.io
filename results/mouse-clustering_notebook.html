@@ -16,9 +16,6 @@
     <link rel="stylesheet" type="text/css" href="../_static/style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -413,30 +410,30 @@ Loading required package: GenomeInfoDb
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">if</span><span class="p">(</span><span class="kc">FALSE</span><span class="p">)</span> <span class="p">{</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">if</span><span class="p">(</span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="c1"># X = as.matrix(read.csv(&quot;FILENAME&quot;, row.names = 1, header= TRUE , sep=&#39;\t&#39;))</span>
-<span class="n">exon_matrix</span> <span class="o">=</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./mouse/exon.counts.csv&quot;</span><span class="p">,</span> <span class="n">row.names</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span> <span class="kc">TRUE</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&#39;,&#39;</span> <span class="p">))</span>
-<span class="n">intron_matrix</span> <span class="o">=</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./mouse/intron.counts.csv&quot;</span><span class="p">,</span> <span class="n">row.names</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span> <span class="kc">TRUE</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&#39;,&#39;</span> <span class="p">))</span>
+<span class="n">exon_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./mouse/exon.counts.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s">&#39;,&#39;</span><span class="w"> </span><span class="p">))</span>
+<span class="n">intron_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./mouse/intron.counts.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s">&#39;,&#39;</span><span class="w"> </span><span class="p">))</span>
 
-<span class="n">mouse_matrix</span> <span class="o">=</span> <span class="n">exon_matrix</span><span class="o">+</span><span class="n">intron_matrix</span>
+<span class="n">mouse_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exon_matrix</span><span class="o">+</span><span class="n">intron_matrix</span>
 
 <span class="c1">#mouse_counts = mouse_matrix[,c(1:20)]</span>
-<span class="n">mouse_counts</span> <span class="o">=</span> <span class="n">mouse_matrix</span>
+<span class="n">mouse_counts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mouse_matrix</span>
 
-<span class="n">mouse_norm</span> <span class="o">=</span> <span class="nf">sweep</span><span class="p">(</span><span class="n">mouse_counts</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="nf">colSums</span><span class="p">(</span><span class="n">mouse_counts</span><span class="p">),</span><span class="n">`/`</span><span class="p">)</span>
+<span class="n">mouse_norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sweep</span><span class="p">(</span><span class="n">mouse_counts</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="nf">colSums</span><span class="p">(</span><span class="n">mouse_counts</span><span class="p">),</span><span class="n">`/`</span><span class="p">)</span>
 
-<span class="n">mouse_tpm</span> <span class="o">=</span> <span class="m">1e6</span><span class="o">*</span><span class="n">mouse_norm</span>
-<span class="n">mouse_log</span> <span class="o">=</span> <span class="nf">log2</span><span class="p">(</span><span class="n">mouse_tpm</span><span class="m">+1</span><span class="p">)</span>
+<span class="n">mouse_tpm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1e6</span><span class="o">*</span><span class="n">mouse_norm</span>
+<span class="n">mouse_log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">log2</span><span class="p">(</span><span class="n">mouse_tpm</span><span class="m">+1</span><span class="p">)</span>
 
-<span class="n">mouse_matrix</span> <span class="o">=</span> <span class="n">mouse_log</span>
+<span class="n">mouse_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mouse_log</span>
 
-<span class="n">mouse_matrix</span> <span class="o">&lt;-</span> <span class="n">mouse_matrix</span><span class="p">[,</span><span class="nf">colSums</span><span class="p">(</span><span class="n">mouse_matrix</span> <span class="o">!=</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="m">0</span><span class="p">]</span>
+<span class="n">mouse_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mouse_matrix</span><span class="p">[,</span><span class="nf">colSums</span><span class="p">(</span><span class="n">mouse_matrix</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">0</span><span class="p">]</span>
 
-<span class="nf">saveRDS</span><span class="p">(</span><span class="n">mouse_matrix</span> <span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;mouse_matrix.Rdata&quot;</span><span class="p">)</span>
+<span class="nf">saveRDS</span><span class="p">(</span><span class="n">mouse_matrix</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mouse_matrix.Rdata&quot;</span><span class="p">)</span>
 <span class="c1">#readRDS(&quot;results/edv_simlr_clustering_v2018-001-224952.Rdata&quot;)</span>
 <span class="p">}</span>
 
-<span class="n">mouse_matrix</span> <span class="o">=</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;mouse_matrix.Rdata&quot;</span><span class="p">)</span>
+<span class="n">mouse_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mouse_matrix.Rdata&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -447,7 +444,7 @@ Loading required package: GenomeInfoDb
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">seurat_object</span> <span class="o">&lt;-</span> <span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">raw.data</span> <span class="o">=</span> <span class="n">mouse_matrix</span><span class="p">,</span>  <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;CZI&quot;</span><span class="p">)</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">seurat_object</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">raw.data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mouse_matrix</span><span class="p">,</span><span class="w">  </span><span class="n">project</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CZI&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -458,11 +455,11 @@ Loading required package: GenomeInfoDb
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n_clust</span> <span class="o">=</span> <span class="m">50</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n_clust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span>
 <span class="nf">set.seed</span><span class="p">(</span><span class="m">11111</span><span class="p">)</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Performing analysis for the Mouse dataset&quot;</span><span class="p">,</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
 <span class="c1">#res_large_scale = SIMLR_Large_Scale(X=mouse_matrix,c=n_clust,k=30,kk=200)</span>
-<span class="n">res_large_scale</span> <span class="o">=</span> <span class="nf">SIMLR_Large_Scale</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">mouse_matrix</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">n_clust</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="m">30</span><span class="p">,</span><span class="n">kk</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
+<span class="n">res_large_scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">SIMLR_Large_Scale</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">mouse_matrix</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">n_clust</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="m">30</span><span class="p">,</span><span class="n">kk</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
 
 
 
@@ -470,15 +467,15 @@ Loading required package: GenomeInfoDb
 
 
 
-<span class="n">path</span> <span class="o">&lt;-</span> <span class="s">&quot;results/edv_simlr_clustering_v&quot;</span>
-<span class="n">time</span> <span class="o">&lt;-</span> <span class="nf">format</span><span class="p">(</span><span class="nf">Sys.time</span><span class="p">(),</span> <span class="n">format</span> <span class="o">=</span> <span class="s">&quot;%Y-%j-%H%M%S&quot;</span><span class="p">)</span>
+<span class="n">path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;results/edv_simlr_clustering_v&quot;</span>
+<span class="n">time</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="nf">Sys.time</span><span class="p">(),</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;%Y-%j-%H%M%S&quot;</span><span class="p">)</span>
 
 
-<span class="nf">saveRDS</span><span class="p">(</span><span class="n">res_large_scale</span> <span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="nf">paste0</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">time</span> <span class="p">,</span> <span class="s">&quot;.RData&quot;</span><span class="p">))</span>
+<span class="nf">saveRDS</span><span class="p">(</span><span class="n">res_large_scale</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.RData&quot;</span><span class="p">))</span>
 
-<span class="nf">pdf</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="nf">paste0</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">time</span> <span class="p">,</span> <span class="s">&quot;.pdf&quot;</span><span class="p">))</span>
+<span class="nf">pdf</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="nf">paste0</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.pdf&quot;</span><span class="p">))</span>
 <span class="c1"># make the scatterd plots</span>
-<span class="nf">plot</span><span class="p">(</span><span class="n">res_large_scale</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="n">n_clust</span><span class="p">))[</span><span class="n">res_large_scale</span><span class="o">$</span><span class="n">y</span><span class="o">$</span><span class="n">cluster</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for Zelsel&quot;</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">res_large_scale</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="n">n_clust</span><span class="p">))[</span><span class="n">res_large_scale</span><span class="o">$</span><span class="n">y</span><span class="o">$</span><span class="n">cluster</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for Zelsel&quot;</span><span class="p">)</span>
 <span class="nf">dev.off</span><span class="p">()</span>
 
 <span class="c1">#readRDS(&quot;results/edv_simlr_clustering_v2018-001-224952.Rdata&quot;)</span>
@@ -832,7 +829,7 @@ Performing iteration 300.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[141]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">$</span><span class="n">y</span> <span class="o">=</span> <span class="nf">kmeans</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="bp">F</span><span class="p">,</span><span class="m">140</span><span class="p">,</span><span class="n">nstart</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">$</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">kmeans</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="bp">F</span><span class="p">,</span><span class="m">140</span><span class="p">,</span><span class="n">nstart</span><span class="o">=</span><span class="m">200</span><span class="p">)</span>
 <br/></pre></div>
 </div>
 </div>
@@ -840,7 +837,7 @@ Performing iteration 300.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[144]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="m">140</span><span class="p">))[</span><span class="n">results</span><span class="o">$</span><span class="n">y</span><span class="o">$</span><span class="n">cluster</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for CZI Mouse - 140 clusters&quot;</span><span class="p">)</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="m">140</span><span class="p">))[</span><span class="n">results</span><span class="o">$</span><span class="n">y</span><span class="o">$</span><span class="n">cluster</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for CZI Mouse - 140 clusters&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -897,7 +894,7 @@ Performing iteration 300.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[119]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mouse_matrix</span> <span class="o">=</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;mouse_matrix.Rdata&quot;</span><span class="p">)</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mouse_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mouse_matrix.Rdata&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -905,7 +902,7 @@ Performing iteration 300.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[120]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">czi_mouse_simlr</span> <span class="o">&lt;-</span> <span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">raw.data</span> <span class="o">=</span> <span class="n">mouse_matrix</span><span class="p">,</span>  <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;CZI&quot;</span><span class="p">)</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">czi_mouse_simlr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">raw.data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mouse_matrix</span><span class="p">,</span><span class="w">  </span><span class="n">project</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CZI&quot;</span><span class="p">)</span>
 <br/><br/></pre></div>
 </div>
 </div>
@@ -913,10 +910,10 @@ Performing iteration 300.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[129]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">simlr_embeddings</span> <span class="o">=</span> <span class="n">results</span><span class="o">$</span><span class="bp">F</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">simlr_embeddings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">results</span><span class="o">$</span><span class="bp">F</span>
 <span class="nf">str</span><span class="p">(</span><span class="n">simlr_embeddings</span><span class="p">)</span>
-<span class="nf">row.names</span><span class="p">(</span><span class="n">simlr_embeddings</span><span class="p">)</span> <span class="o">=</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">mouse_matrix</span><span class="p">)</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">simlr_embeddings</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;SIMLR&quot;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="nf">dim</span><span class="p">(</span><span class="n">simlr_embeddings</span><span class="p">)[</span><span class="m">2</span><span class="p">])</span>
+<span class="nf">row.names</span><span class="p">(</span><span class="n">simlr_embeddings</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">mouse_matrix</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simlr_embeddings</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;SIMLR&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">dim</span><span class="p">(</span><span class="n">simlr_embeddings</span><span class="p">)[</span><span class="m">2</span><span class="p">])</span>
 <br/></pre></div>
 </div>
 </div>
@@ -982,10 +979,10 @@ Performing iteration 300.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[132]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><br/><span></span><span class="n">czi_mouse_simlr</span> <span class="o">&lt;-</span> <span class="nf">SetDimReduction</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">czi_mouse_simlr</span><span class="p">,</span> <span class="n">reduction.type</span> <span class="o">=</span> <span class="s">&quot;simlr&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;cell.embeddings&quot;</span><span class="p">,</span>
-    <span class="n">new.data</span> <span class="o">=</span> <span class="n">simlr_embeddings</span><span class="p">)</span>
-<span class="n">czi_mouse_simlr</span> <span class="o">&lt;-</span> <span class="nf">SetDimReduction</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">czi_mouse_simlr</span><span class="p">,</span> <span class="n">reduction.type</span> <span class="o">=</span> <span class="s">&quot;simlr&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;key&quot;</span><span class="p">,</span>
-    <span class="n">new.data</span> <span class="o">=</span> <span class="s">&quot;SIMLR&quot;</span><span class="p">)</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><br/><span></span><span class="n">czi_mouse_simlr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">SetDimReduction</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">czi_mouse_simlr</span><span class="p">,</span><span class="w"> </span><span class="n">reduction.type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;simlr&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cell.embeddings&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">new.data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simlr_embeddings</span><span class="p">)</span>
+<span class="n">czi_mouse_simlr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">SetDimReduction</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">czi_mouse_simlr</span><span class="p">,</span><span class="w"> </span><span class="n">reduction.type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;simlr&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;key&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">new.data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SIMLR&quot;</span><span class="p">)</span>
 
 <span class="nf">str</span><span class="p">(</span><span class="n">czi_mouse_simlr</span><span class="p">)</span>
 </pre></div>
@@ -1129,7 +1126,7 @@ Formal class &#39;data.frame&#39; [package &#34;methods&#34;] with 4 slots
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[135]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">czi_mouse_simlr</span> <span class="o">&lt;-</span> <span class="nf">FindClusters</span><span class="p">(</span><span class="n">czi_mouse_simlr</span><span class="p">,</span> <span class="n">reduction.type</span> <span class="o">=</span> <span class="s">&quot;simlr&quot;</span><span class="p">,</span> <span class="n">dims.use</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">,</span> <span class="n">save.SNN</span> <span class="o">=</span> <span class="bp">T</span> <span class="p">,</span> <span class="n">force.recalc</span> <span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">czi_mouse_simlr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">czi_mouse_simlr</span><span class="p">,</span><span class="w"> </span><span class="n">reduction.type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;simlr&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dims.use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">save.SNN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">force.recalc</span><span class="w"> </span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
 <br/></pre></div>
 </div>
 </div>
@@ -1308,7 +1305,7 @@ To change this limit, set the config variable
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="m">73</span><span class="p">))[</span><span class="n">czi_mouse_simlr</span><span class="o">@</span><span class="n">ident</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for CZI Mouse - Graph Clustering&quot;</span><span class="p">)</span>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">results</span><span class="o">$</span><span class="n">ydata</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">colors</span><span class="p">(</span><span class="m">73</span><span class="p">))[</span><span class="n">czi_mouse_simlr</span><span class="o">@</span><span class="n">ident</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;SIMLR component 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;SIMLR component 2&quot;</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;SIMILR 2D visualization for CZI Mouse - Graph Clustering&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
